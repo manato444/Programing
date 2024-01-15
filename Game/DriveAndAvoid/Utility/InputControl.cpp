@@ -65,6 +65,12 @@ void InputControl::Update()
 //ボタン取得：押している間
 bool InputControl::GetButton(int button)
 {
+	return CheckButtonRange(button) && (now_button[button] && old_button[button]);
+}
+
+//ボタン取得：押した瞬間
+bool InputControl::GetButtonDown(int button)
+{
 	return CheckButtonRange(button) && (now_button[button] && !old_button[button]);
 }
 
