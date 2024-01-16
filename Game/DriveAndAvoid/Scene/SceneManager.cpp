@@ -22,6 +22,9 @@ void SceneManager::Initialize()
 {
 
 	//ウィンドウのタイトルを設定
+	SetMainWindowText("Drive&Avoid");
+
+	//ウィンドウモードで起動
 	if (ChangeWindowMode(TRUE) != DX_CHANGESCREEN_OK)
 	{
 		throw("ウィンドウモードで起動できませんでした\n");
@@ -147,7 +150,7 @@ void SceneManager::ChangeScene(eSceneType scene_type)
 	}
 
 	//新しく生成したシーンの初期化を行う
-	new_scene = new_scene;
+	new_scene->Initialize();
 
 	//現在のシーンの更新
 	current_scene = new_scene;
@@ -179,6 +182,5 @@ SceneBase* SceneManager::CreateScene(eSceneType scene_type)
 
 	default:
 		return nullptr;
-
 	}
 }

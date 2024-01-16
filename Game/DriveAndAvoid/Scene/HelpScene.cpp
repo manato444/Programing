@@ -11,7 +11,6 @@ HelpScene::~HelpScene()
 }
 
 //‰Šú‰»ˆ—
-
 void HelpScene::Initialize()
 {
 

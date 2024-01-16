@@ -31,7 +31,7 @@ void TitleScene::Initialize()
 	}
 	if (cursor_image == -1)
 	{
-		throw("Resource/images/cone.bmp‚ª‚ ‚è‚Ü‚¹‚ñ");
+		throw("Resource/images/cone.bmp‚ª‚ ‚è‚Ü‚¹‚ñ\n");
 	}
 	
 }
@@ -58,7 +58,7 @@ eSceneType TitleScene::Update()
 		//1”Ôã‚É“’B‚µ‚½‚çAˆê”Ô‰º‚É‚·‚é
 		if (menu_cursor < 0)
 		{
-			menu_cursor - 3;
+			menu_cursor = 3;
 		}
 	}
 
@@ -69,11 +69,11 @@ eSceneType TitleScene::Update()
 		{
 		case 0:
 			return eSceneType::E_MAIN;
-
 		case 1:
 			return eSceneType::E_RANKING_DISP;
-
 		case 2:
+			return eSceneType::E_HELP;
+		default:
 			return eSceneType::E_END;
 		}
 	}

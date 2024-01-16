@@ -10,7 +10,7 @@ RankingData::RankingData()
 		rank[i] = NULL;
 		for (int j = 0; j < 15; j++)
 		{
-			name[i][j] = '\n';
+			name[i][j] = '\0';
 		}
 	}
 }
@@ -47,7 +47,7 @@ void RankingData::Initialize()
 	//末尾データの設定
 	score[5] = 0;
 	rank[5] = 0;
-	name[5][0] = '\n';
+	name[5][0] = '\0';
 }
 
 //終了処理

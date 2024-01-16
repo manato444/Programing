@@ -25,12 +25,15 @@ void Player::Initialize()
 	barrier_count = 3;
 
 	//画像の読み込み
-	image = LoadGraph("Resouce/images/car1pol.bmp");
+	image = LoadGraph("Resource/images/car1pol.bmp");
+	//image = LoadGraph("Resource/images/gentuki.bmp");
+
+
 
 	//エラーチェック
 	if (image == -1)
 	{
-		throw("Resouce/images/car1pol.bmpがありません\n");
+		throw("Resource/images/car1pol.bmpがありません\n");
 	}
 }
 
@@ -126,6 +129,12 @@ void Player::DecreaseHp(float value)
 	this->hp += value;
 }
 
+//位置情報取得処理
+Vector2D Player::GetLocation() const
+{
+	return this->location;
+}
+
 //当たり判定の大きさ取得処理
 Vector2D Player::GetBoxSize() const
 {
@@ -177,7 +186,7 @@ void Player::Movement()
 	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_RIGHT))
 	{
 		move += Vector2D(1.0f, 0.0f);
-		angle = -DX_PI_F / 18;
+		angle = DX_PI_F / 18;
 	}
 	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_UP))
 	{
