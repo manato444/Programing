@@ -46,7 +46,7 @@ void GameMainScene::Initialize()
 
 	//オブジェクトの生成
 	player = new Player;
-	enemy = new Enemy * [10];
+	enemy = new Enemy* [10];
 
 	//オブジェクトの初期化
 	player->Initialize();
@@ -65,7 +65,8 @@ eSceneType GameMainScene::Update()
 	player->Update();
 
 	//移動距離の更新
-	mileage += (int)player->GetSpeed() + 5;
+	mileage += (int)player->GetSpeed
+	() + 5;
 
 	//敵生成処理
 	if (mileage / 20 % 100 == 0)
@@ -170,8 +171,8 @@ void GameMainScene::Draw() const
 	
 	//体力ゲージの描画
 	fx = 510.0f;
-	fy - 430.0f;
-	DrawFormatString(fx, fy, GetColor(0, 0, 0), "PLAYER HP");
+	fy = 430.0f;
+	DrawFormatStringF(fx, fy, GetColor(0, 0, 0), "PLAYER HP");
 	DrawBoxAA(fx, fy + 20.0f, fx + (player->GetHp() * 100 / 1000), fy + 40.0f,
 		GetColor(255, 0, 0), TRUE);
 	DrawBoxAA(fx, fy + 20.0f, fx + 100.0f, fy + 40.0f, GetColor(0, 0, 0), FALSE);
@@ -227,7 +228,7 @@ void GameMainScene::Finalize()
 		}
 	}
 
-	delete enemy;
+	delete[] enemy;
 }
 
 //現在のシーン情報を取得

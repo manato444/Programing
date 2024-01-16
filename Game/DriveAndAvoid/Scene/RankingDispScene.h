@@ -8,7 +8,7 @@ class RankingDispScene : public SceneBase
 
 private:
 
-public:
+private:
 
 	//”wŒi‰æ‘œ
 	int background_image;
@@ -27,7 +27,5 @@ public:
 	virtual void Finalize() override;
 
 	virtual eSceneType GetNowScene() const override;
-
-
 
 };

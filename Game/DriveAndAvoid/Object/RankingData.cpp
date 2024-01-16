@@ -61,7 +61,7 @@ void RankingData::SetRankingData(int score, const char* name)
 	this->score[5] = score;
 	strcpy_s(this->name[5], name);
 
-	SortData;
+	SortData();
 }
 
 //ƒXƒRƒAæ“¾ˆ—

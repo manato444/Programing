@@ -115,7 +115,7 @@ void ResultScene::ReadResultData()
 	}
 
 	//Œ‹‰Ê‚ğ“Ç‚İ‚Ş
-	fscanf_s(fp, "&6d,\n", &score);
+	fscanf_s(fp, "&6d", &score);
 
 	//”ğ‚¯‚½”‚Æ“¾“_‚ğæ“¾
 	for (int i = 0; i < 3; i++)
