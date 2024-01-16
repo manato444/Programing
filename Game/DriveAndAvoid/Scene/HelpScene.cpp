@@ -11,6 +11,22 @@ HelpScene::~HelpScene()
 }
 
 //初期化処理
+
+void HelpScene::Initialize()
+{
+
+	//画像の読み込み
+	background_image = LoadGraph("Resource/images/Title.bmp");
+
+	//エラーチェック
+	if (background_image == -1)
+	{
+		throw("Resource/images/Title.bmpがありません");
+	}
+}
+
+
+//更新処理
 eSceneType HelpScene::Update()
 {
 
