@@ -7,6 +7,7 @@ bool InputControl::old_button[16] = {};
 float InputControl::trigger[2] = {};
 Vector2D InputControl::stick[2] = {};
 
+
 //入力機能：更新処理
 void InputControl::Update()
 {

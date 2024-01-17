@@ -22,7 +22,7 @@ void RankingInputScene::Initialize()
 	//エラーチェック
 	if (background_image == -1)
 	{
-		throw("Resource / images / Ranking.bmpがありません\n");
+		throw("Resource/images/Ranking.bmpがありません\n");
 	}
 
 	//メモリの動的確保

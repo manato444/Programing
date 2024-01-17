@@ -22,11 +22,12 @@ void Player::Initialize()
 	speed = 3.0f;
 	hp = 1000;
 	fuel = 20000;
-	barrier_count = 3;
+	barrier_count = 5;
 
 	//画像の読み込み
 	image = LoadGraph("Resource/images/car1pol.bmp");
 	//image = LoadGraph("Resource/images/gentuki.bmp");
+	//image = LoadGraph("Resource/images/car1.bmp");
 
 
 
@@ -180,17 +181,17 @@ void Player::Movement()
 	//十字移動処理
 	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_LEFT))
 	{
-		move += Vector2D(-1.0f, 0.0f);
+		move += Vector2D(-3.0f, 0.0f);
 		angle = -DX_PI_F / 18;
 	}
 	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_RIGHT))
 	{
-		move += Vector2D(1.0f, 0.0f);
+		move += Vector2D(3.0f, 0.0f);
 		angle = DX_PI_F / 18;
 	}
 	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_UP))
 	{
-		move += Vector2D(0.0f, -1.0f);
+		move += Vector2D(0.0f, -2.0f);
 	}
 	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_DOWN))
 	{
@@ -210,8 +211,28 @@ void Player::Movement()
 void Player::Acceleration()
 {
 	//LBボタンが押されたら、減速する
-	if (InputControl::GetButtonDown(XINPUT_BUTTON_RIGHT_SHOULDER) && speed < 10.0f)
+	if (InputControl::GetButtonDown(XINPUT_BUTTON_LEFT_SHOULDER) && speed > 1.0f)
+	{
+		speed -= 1.0f;
+	}
+
+	//RBボタンが押されたら、加速する
+	if (InputControl::GetButtonDown(XINPUT_BUTTON_RIGHT_SHOULDER) && speed < 30.0f)
 	{
 		speed += 1.0f;
 	}
+
+	//右トリガーで加速
+	if (InputControl::GetRightTrigger() && speed < 30.0f)
+	{
+		speed += 0.1f;
+	}
+	//左トリガーで減速
+	if (InputControl::GetLeftTrigger() && speed > 1.0f)
+	{
+		speed -= 0.5f;
+	}
+
+
+
 }

@@ -86,7 +86,7 @@ const char* RankingData::GetName(int value) const
 void RankingData::SortData()
 {
 
-	//選択ソートを使用し、降順で入れ替える
+	//選択法ソートを使用し、降順で入れ替える
 	for (int i = 0; i < 5; i++)
 	{
 		for (int j = i + 1; j < 6; j++)

@@ -65,8 +65,7 @@ eSceneType GameMainScene::Update()
 	player->Update();
 
 	//移動距離の更新
-	mileage += (int)player->GetSpeed
-	() + 5;
+	mileage += (int)player->GetSpeed() + 5;
 
 	//敵生成処理
 	if (mileage / 20 % 100 == 0)
@@ -139,7 +138,7 @@ void GameMainScene::Draw() const
 	player->Draw();
 
 	//UIの描画
-	DrawBox(500, 0, 540, 480, GetColor(0, 153, 0), TRUE);
+	DrawBox(500, 0, 640, 480, GetColor(0, 153, 0), TRUE);
 	SetFontSize(16);
 	DrawFormatString(510, 20, GetColor(0, 0, 0), "ハイスコア");
 	DrawFormatString(560, 40, GetColor(255, 255, 255), "%08d", high_score);
@@ -208,7 +207,7 @@ void GameMainScene::Finalize()
 	//避けた数と得点を保存
 	for (int i = 0; i < 3; i++)
 	{
-		fprintf(fp, "%d\n", enemy_count[i]);
+		fprintf(fp, "%d,\n", enemy_count[i]);
 	}
 
 	//ファイルクローズ
