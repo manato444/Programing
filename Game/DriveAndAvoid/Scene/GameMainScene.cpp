@@ -28,6 +28,10 @@ void GameMainScene::Initialize()
 	barrier_image = LoadGraph("Resource/images/barrier.png");
 	int result = LoadDivGraph("Resource/images/car.bmp", 3, 3, 1, 63, 120, enemy_image);
 
+	//BGM
+	sound = LoadSoundMem("Resource/images/HappyMoment.mp3");
+	ChangeVolumeSoundMem(255 * 80 / 100, sound);
+
 	//エラーチェック
 	if (back_ground == -1)
 	{
@@ -60,15 +64,16 @@ void GameMainScene::Initialize()
 //更新処理
 eSceneType GameMainScene::Update()
 {
+	PlaySoundMem(sound, DX_PLAYTYPE_LOOP, FALSE);
 
 	//プレイヤーの更新
 	player->Update();
 
 	//移動距離の更新
-	mileage += (int)player->GetSpeed() + 5;
+	mileage += (int)player->GetSpeed() + 2;
 
 	//敵生成処理
-	if (mileage / 20 % 100 == 0)
+	if (mileage / 20 % 20 == 0)
 	{
 		for (int i = 0; i < 10; i++)
 		{
@@ -101,8 +106,9 @@ eSceneType GameMainScene::Update()
 			//当たり判定の確認
 			if (IsHitCheck(player, enemy[i]))
 			{
+
 				player->SetActive(false);
-				player->DecreaseHp(-50.0f);
+				player->DecreaseHp(-160.0f);
 				enemy[i]->Finalize();
 				delete enemy[i];
 				enemy[i] = nullptr;

@@ -17,7 +17,7 @@ void Player::Initialize()
 {
 	is_active = true;
 	location = Vector2D(320.0f, 380.0f);
-	box_size = Vector2D(31.0f, 60.0f);
+	box_size = Vector2D(27.0f, 56.0f);
 	angle = 0.0f;
 	speed = 3.0f;
 	hp = 1000;
@@ -45,6 +45,7 @@ void Player::Update()
 	//操作不可状態であれば、自身を回転させる
 	if (!is_active)
 	{
+		
 		angle += DX_PI_F / 24.0f;
 		speed = 1.0f;
 		if (angle >= DX_PI_F * 4.0f)
@@ -55,7 +56,7 @@ void Player::Update()
 	}
 
 	//燃料の消費
-	fuel -= speed;
+	fuel -= speed - 6;
 
 	//移動処理
 	Movement();
@@ -191,11 +192,11 @@ void Player::Movement()
 	}
 	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_UP))
 	{
-		move += Vector2D(0.0f, -2.0f);
+		move += Vector2D(0.0f, -3.0f);
 	}
 	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_DOWN))
 	{
-		move += Vector2D(0.0f, 1.0f);
+		move += Vector2D(0.0f, 3.0f);
 	}
 	location += move;
 
@@ -222,10 +223,18 @@ void Player::Acceleration()
 		speed += 1.0f;
 	}
 
-	//右トリガーで加速
+	//右トリガーで加速(離すとゆっくり減速)
 	if (InputControl::GetRightTrigger() && speed < 30.0f)
 	{
 		speed += 0.1f;
+	}
+	else
+	{
+		for (int i = 0; i < speed - 3; i++)
+		{
+
+			speed -= 0.01f;
+		}
 	}
 	//左トリガーで減速
 	if (InputControl::GetLeftTrigger() && speed > 1.0f)

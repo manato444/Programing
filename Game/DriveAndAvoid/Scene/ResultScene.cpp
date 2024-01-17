@@ -74,8 +74,12 @@ void ResultScene::Draw() const
 
 		DrawRotaGraph(230, 230 + (i * 20), 0.3f, DX_PI_F / 2, enemy_image[i], TRUE);
 
-		DrawFormatString(260, 222 + (i * 21), GetColor(255, 255, 255), "%6d x%4d=%6d",
+		DrawFormatString(260, 222 + (i * 21), GetColor(255, 255, 255), "%3d x%4d=%6d",
 			enemy_count[i], (i + 1) * 50, (i + 1) * 50 * enemy_count[i]);
+
+		//DrawFormatString(260, 222 + (i * 21), GetColor(255, 255, 255), "%6d x%4d=%6d",
+			//enemy_count[i], (i + 1), (i + 1), enemy_count[i]);
+
 
 	}
 
