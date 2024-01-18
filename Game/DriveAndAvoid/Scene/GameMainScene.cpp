@@ -1,5 +1,6 @@
 #include"GameMainScene.h"
 #include"../Object/RankingData.h"
+#include"../Utility/InputControl.h"
 #include"DxLib.h"
 #include<math.h>
 
@@ -123,6 +124,18 @@ eSceneType GameMainScene::Update()
 		}
 	}
 
+	//startボタンでタイトルへ
+	if (InputControl::GetButtonDown(XINPUT_BUTTON_START))
+	{
+		WaitTimer(300);
+		return eSceneType::E_TITLE;
+	}
+	//Yボタンでリザルトへ
+	if (InputControl::GetButtonDown(XINPUT_BUTTON_Y))
+	{
+		return eSceneType::E_RESULT;
+	}
+
 	//プレイヤーの燃料か体力が0未満なら、リザルトに遷移する
 	if (player->GetFuel() < 0.0f || player->GetHp() < 0.0f)
 	{
@@ -176,6 +189,12 @@ void GameMainScene::Draw() const
 	DrawFormatString(555, 260, GetColor(255, 255, 255), "%08.1f", player->GetSpeed());
 	
 	DrawFormatString(510, 280, GetColor(0, 0, 0), "バリア");
+
+	/*
+	SetFontSize(15);
+	DrawFormatString(510, 340, 0xf6ff00, "'START'");
+	DrawFormatString(510, 360, 0xf6ff00, "'タイトルへ戻る'");
+	*/
 
 	//バリア枚数の描画
 	for (int i = 0; i < player->GetBarrierCount(); i++)

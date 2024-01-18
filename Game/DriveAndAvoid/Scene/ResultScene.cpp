@@ -74,7 +74,8 @@ void ResultScene::Draw() const
 	DrawBox(500, 0, 640, 480, GetColor(0, 0, 250), TRUE);
 
 	SetFontSize(30);
-	DrawString(215, 160, "ƒQ[ƒ€ƒI[ƒo[", GetColor(255, 0, 0));
+	ChangeFont("‚l‚r –¾’©");
+	DrawString(200, 160, "‚f‚`‚l‚d‚n‚u‚d‚q", GetColor(255, 0, 0));
 	SetFontSize(16);
 	DrawString(180, 200, "‘–s‹——£        ", GetColor(255, 255, 255));
 
@@ -97,7 +98,7 @@ void ResultScene::Draw() const
 
 	SetFontSize(15);
 	DrawString(340, 310, "'A'ƒ^ƒCƒgƒ‹‚Ö–ß‚é", GetColor(255, 100, 100));
-	DrawString(150, 310, "'B'ƒ‰ƒ“ƒLƒ“ƒO‚É“o˜^", GetColor(0, 255, 0));
+	DrawString(152, 310, "'B'ƒ‰ƒ“ƒLƒ“ƒO‚É“o˜^", GetColor(0, 255, 0));
 
 
 }

@@ -261,13 +261,13 @@ void Player::Acceleration()
 	//LBボタンが押されたら、減速する
 	if (InputControl::GetButtonDown(XINPUT_BUTTON_LEFT_SHOULDER) && speed > 1.0f)
 	{
-		speed -= 1.0f;
+		speed -= 3.0f;
 	}
 
-	//RBボタンが押されたら、加速する
-	if (InputControl::GetButtonDown(XINPUT_BUTTON_RIGHT_SHOULDER) && speed < 30.1f)
+	//RBボタンが押されたら、加速する(限界突破スピード40までだせます^^)
+	if (InputControl::GetButtonDown(XINPUT_BUTTON_RIGHT_SHOULDER) && speed < 40.1f)
 	{
-		speed += 1.0f;
+		speed += 2.0f;
 	}
 
 	//右トリガーで加速
