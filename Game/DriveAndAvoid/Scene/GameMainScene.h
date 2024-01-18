@@ -18,6 +18,7 @@ private:
 	Enemy** enemy;		 //敵
 
 	int sound; //BGM
+	int image;
 
 public:
 	GameMainScene();
@@ -34,6 +35,8 @@ private:
 
 	//ハイスコア読み込み処理
 	void ReadHighScore();
+
+	void GameCount();
 
 	//当たり判定
 	bool IsHitCheck(Player* p, Enemy* e);

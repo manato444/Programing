@@ -48,26 +48,35 @@ eSceneType ResultScene::Update()
 		return eSceneType::E_RANKING_INPUT;
 	}
 
+	if (InputControl::GetButtonDown(XINPUT_BUTTON_A))
+	{
+		return eSceneType::E_TITLE;
+	}
+
+
 	return GetNowScene();
 }
 
 //描画処理
 void ResultScene::Draw() const
 {
+	
+	GraphFilter(back_ground, DX_GRAPH_FILTER_GAUSS, 16, 1400);
 
 	//背景画像を描画
 	DrawGraph(0, 0, back_ground, TRUE);
 
+
 	//スコア等表示領域
-	DrawBox(150, 150, 490, 330, GetColor(0, 153, 0), TRUE);
-	DrawBox(150, 150, 490, 330, GetColor(0, 0, 0), FALSE);
+	DrawBox(150, 150, 490, 330, GetColor(0, 0, 0), TRUE);
+	DrawBox(150, 150, 490, 330, GetColor(255, 255, 255), FALSE);
 
-	DrawBox(500, 0, 640, 480, GetColor(0, 153, 0), TRUE);
+	DrawBox(500, 0, 640, 480, GetColor(0, 0, 250), TRUE);
 
-	SetFontSize(20);
-	DrawString(220, 170, "ゲームオーバー", GetColor(204, 0, 0));
+	SetFontSize(30);
+	DrawString(215, 160, "ゲームオーバー", GetColor(255, 0, 0));
 	SetFontSize(16);
-	DrawString(180, 200, "走行距離        ", GetColor(0, 0, 0));
+	DrawString(180, 200, "走行距離        ", GetColor(255, 255, 255));
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -83,8 +92,14 @@ void ResultScene::Draw() const
 
 	}
 
-	DrawString(180, 290, "スコア", GetColor(0, 0, 0));
+	DrawString(180, 290, "スコア", GetColor(255, 255, 255));
 	DrawFormatString(180, 290, 0xFFFFFF, "       =%6d", score);
+
+	SetFontSize(15);
+	DrawString(340, 310, "'A'タイトルへ戻る", GetColor(255, 100, 100));
+	DrawString(150, 310, "'B'ランキングに登録", GetColor(0, 255, 0));
+
+
 }
 
 //終了時処理

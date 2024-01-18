@@ -3,8 +3,9 @@
 #include"DxLib.h"
 #include<math.h>
 
-GameMainScene::GameMainScene() : high_score(0), back_ground(NULL), barrier_image(NULL),
-								 mileage(0), player(nullptr), enemy(nullptr)
+
+GameMainScene::GameMainScene() : high_score(0), back_ground(NULL), barrier_image(NULL), image(NULL),
+								sound(NULL), mileage(0), player(nullptr), enemy(nullptr)
 {
 	for (int i = 0; i < 3; i++)
 	{
@@ -17,6 +18,8 @@ GameMainScene::~GameMainScene()
 {
 }
 
+
+
 //初期化処理
 void GameMainScene::Initialize()
 {
@@ -26,10 +29,14 @@ void GameMainScene::Initialize()
 	//画像の読み込み
 	back_ground = LoadGraph("Resource/images/back.bmp");
 	barrier_image = LoadGraph("Resource/images/barrier.png");
-	int result = LoadDivGraph("Resource/images/car.bmp", 3, 3, 1, 63, 120, enemy_image);
+	int result = LoadDivGraph("Resource/images/car.bmp", 3, 3, 1, 63, 120, enemy_image); 
+
+	image = LoadGraph("Resource/images/supana.bmp");
 
 	//BGM
-	sound = LoadSoundMem("Resource/images/HappyMoment.mp3");
+	sound = LoadSoundMem("Resource/images/BreakItDown.mp3");
+	//sound = LoadSoundMem("Resource/images/HappyMoment.mp3");
+
 	ChangeVolumeSoundMem(255 * 80 / 100, sound);
 
 	//エラーチェック
@@ -73,7 +80,7 @@ eSceneType GameMainScene::Update()
 	mileage += (int)player->GetSpeed() + 2;
 
 	//敵生成処理
-	if (mileage / 20 % 20 == 0)
+	if (mileage / 20 % 35 == 0)
 	{
 		for (int i = 0; i < 10; i++)
 		{
@@ -127,6 +134,7 @@ eSceneType GameMainScene::Update()
 //描画処理
 void GameMainScene::Draw() const
 {
+	
 	//背景画像の描画
 	DrawGraph(0, mileage % 480 - 480, back_ground, TRUE);
 	DrawGraph(0, mileage % 480, back_ground, TRUE);
@@ -144,7 +152,14 @@ void GameMainScene::Draw() const
 	player->Draw();
 
 	//UIの描画
-	DrawBox(500, 0, 640, 480, GetColor(0, 153, 0), TRUE);
+	DrawBox(500, 0, 640, 480, GetColor(0, 0, 250), TRUE);
+
+	DrawBox(500, 0, 640, 70, GetColor(255, 255, 255), TRUE);
+	DrawBox(500, 10, 640, 60, GetColor(100, 100, 100), TRUE);
+
+	DrawGraph(580, 338, image, TRUE);
+
+
 	SetFontSize(16);
 	DrawFormatString(510, 20, GetColor(0, 0, 0), "ハイスコア");
 	DrawFormatString(560, 40, GetColor(255, 255, 255), "%08d", high_score);
@@ -160,18 +175,20 @@ void GameMainScene::Draw() const
 	DrawFormatString(510, 240, GetColor(0, 0, 0), "スピード");
 	DrawFormatString(555, 260, GetColor(255, 255, 255), "%08.1f", player->GetSpeed());
 	
+	DrawFormatString(510, 280, GetColor(0, 0, 0), "バリア");
+
 	//バリア枚数の描画
 	for (int i = 0; i < player->GetBarrierCount(); i++)
 	{
-		DrawRotaGraph(520 + i * 25, 340, 0.2f, 0, barrier_image, TRUE, FALSE);
+		DrawRotaGraph(520 + i * 25, 320, 0.2f, 0, barrier_image, TRUE, FALSE);
 	}
 
 	//燃料ゲージの描画
 	float fx = 510.0f;
 	float fy = 390.0f;
 	DrawFormatStringF(fx, fy, GetColor(0, 0, 0), "FUEL METER");
-	DrawBoxAA(fx, fy + 20.0f, fx + (player->GetFuel() * 100 / 20000), fy + 40.0f,
-			  GetColor(0, 102, 204), TRUE);
+	DrawBoxAA(fx, fy + 20.0f, fx + (player->GetFuel() * 100 / 85000), fy + 40.0f,
+			  GetColor(0, 230, 0), TRUE);
 	DrawBoxAA(fx, fy + 20.0f, fx + 100.0f, fy + 40.0f, GetColor(0, 0, 0), FALSE);
 	
 	//体力ゲージの描画
@@ -187,6 +204,7 @@ void GameMainScene::Draw() const
 //終了時処理
 void GameMainScene::Finalize()
 {
+	StopSoundMem(sound);
 
 	//スコアを計算する
 	int score = (mileage / 10 * 10);

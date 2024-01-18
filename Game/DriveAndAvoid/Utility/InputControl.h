@@ -12,6 +12,8 @@ private:
 	static float trigger[2];		//左右トリガー入力値
 	static Vector2D stick[2];		//左右スティック入力値
 
+	static float stick1[2];
+
 public:
 
 	//更新処理
@@ -29,6 +31,10 @@ public:
 	//スティック入力取得処理
 	static Vector2D GetLeftStick();			//左スティック
 	static Vector2D GetRightStick();		//右スティック
+
+	static float GetLeft_Stick();
+	
+	//static float SetLeft_Stick();
 
 private:
 

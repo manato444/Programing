@@ -2,6 +2,9 @@
 #include"../Utility/InputControl.h"
 #include"DxLib.h"
 
+float Player::stick2[2] = {};
+
+
 Player::Player() : is_active(false), image(NULL), location(0.0f), box_size(0.0f), angle(0.0f),
 				                                  speed(0.0f), hp(0.0f), fuel(0.0f), barrier_count(0),
 barrier(nullptr)
@@ -15,14 +18,15 @@ Player::~Player()
 //初期化処理
 void Player::Initialize()
 {
+
 	is_active = true;
 	location = Vector2D(320.0f, 380.0f);
-	box_size = Vector2D(27.0f, 56.0f);
+	box_size = Vector2D(26.0f, 54.0f);
 	angle = 0.0f;
 	speed = 3.0f;
 	hp = 1000;
-	fuel = 20000;
-	barrier_count = 5;
+	fuel = 85000;
+	barrier_count = 3;
 
 	//画像の読み込み
 	image = LoadGraph("Resource/images/car1pol.bmp");
@@ -45,9 +49,9 @@ void Player::Update()
 	//操作不可状態であれば、自身を回転させる
 	if (!is_active)
 	{
-		
-		angle += DX_PI_F / 24.0f;
+		angle += DX_PI_F / 10.0f;
 		speed = 1.0f;
+
 		if (angle >= DX_PI_F * 4.0f)
 		{
 			is_active = true;
@@ -56,10 +60,12 @@ void Player::Update()
 	}
 
 	//燃料の消費
-	fuel -= speed - 6;
+	fuel -= speed;
 
 	//移動処理
 	Movement();
+
+	SetLeft_Stick();
 
 	//加減速処理
 	Acceleration();
@@ -95,7 +101,7 @@ void Player::Update()
 //描画処理
 void Player::Draw()
 {
-
+	
 	//プレイヤー画像の描画
 	DrawRotaGraphF(location.x, location.y, 1.0, angle, image, TRUE);
 
@@ -173,9 +179,22 @@ bool Player::IsBarrier() const
 	return (barrier != nullptr);
 }
 
+
+//左スティックの値をセット
+float Player::SetLeft_Stick()
+{
+	stick2[0] = InputControl::GetLeft_Stick();
+	
+	return stick2[0];
+}
+
+
+
 //移動処理
 void Player::Movement()
 {
+	float x, y;
+
 	Vector2D move = Vector2D(0.0f);
 	angle = 0.0f;
 
@@ -184,6 +203,7 @@ void Player::Movement()
 	{
 		move += Vector2D(-3.0f, 0.0f);
 		angle = -DX_PI_F / 18;
+
 	}
 	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_RIGHT))
 	{
@@ -198,10 +218,37 @@ void Player::Movement()
 	{
 		move += Vector2D(0.0f, 3.0f);
 	}
+	if(InputControl::GetLeft_Stick)
+	{
+		move += Vector2D(stick2[0], 0.0f);
+
+		if (stick2[0] >= 0.2f)
+		{
+			angle = DX_PI_F / 30;
+			barrier != nullptr;
+			barrier = new Barrier;
+		}
+		else if (stick2[0] <= -0.2f)
+		{
+			
+			angle = -DX_PI_F / 30;
+			barrier != nullptr;
+			barrier = new Barrier;
+		}
+		else if (stick2[0] == 0.0f)
+		{
+		
+			angle = -DX_PI_F / 30;
+			barrier == nullptr;
+			delete barrier;
+		}
+
+	}
+
 	location += move;
 
 	//画面外に行かないように制限する
-	if ((location.x < box_size.x) || (location.x >= 640.0f - 180.0f) ||
+	if ((location.x < box_size.x) || (location.x >= 640.0f - 170.0f) ||
 		(location.y < box_size.y) || (location.y >= 480.0f - box_size.y))
 	{
 		location -= move;
@@ -218,30 +265,29 @@ void Player::Acceleration()
 	}
 
 	//RBボタンが押されたら、加速する
-	if (InputControl::GetButtonDown(XINPUT_BUTTON_RIGHT_SHOULDER) && speed < 30.0f)
+	if (InputControl::GetButtonDown(XINPUT_BUTTON_RIGHT_SHOULDER) && speed < 30.1f)
 	{
 		speed += 1.0f;
 	}
 
-	//右トリガーで加速(離すとゆっくり減速)
-	if (InputControl::GetRightTrigger() && speed < 30.0f)
+	//右トリガーで加速
+	if (InputControl::GetRightTrigger() && speed <= 30.0f)
 	{
-		speed += 0.1f;
+		speed += 0.3f;
 	}
 	else
 	{
-		for (int i = 0; i < speed - 3; i++)
+		/*(離すとゆっくり減速)
+		for (int i = 0; i < speed - 4; i++)
 		{
-
-			speed -= 0.01f;
+			speed -= 0.001f;
 		}
+		*/
 	}
 	//左トリガーで減速
 	if (InputControl::GetLeftTrigger() && speed > 1.0f)
 	{
-		speed -= 0.5f;
+		speed -= 0.3f;
 	}
-
-
 
 }

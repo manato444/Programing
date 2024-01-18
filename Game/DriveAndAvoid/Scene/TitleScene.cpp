@@ -2,6 +2,8 @@
 #include"../Utility/InputControl.h"
 #include"DxLib.h"
 
+
+
 TitleScene::TitleScene() : background_image(NULL), menu_image(NULL),
 						   cursor_image(NULL), menu_cursor(0)
 {
@@ -15,6 +17,7 @@ TitleScene::~TitleScene()
 void TitleScene::Initialize()
 {
 
+	
 	//画像の読み込み
 	background_image = LoadGraph("Resource/images/Title.bmp");
 	//background_image = LoadGraph("Resource/images/End.bmp");
@@ -88,6 +91,8 @@ eSceneType TitleScene::Update()
 //描画処理
 void TitleScene::Draw() const
 {
+	//メニューチカチカ～
+	GraphFilter(menu_image, DX_GRAPH_FILTER_HSB, 0, 2, 3, 5);
 
 	//タイトル画像の描画
 	DrawGraph(0, 0, background_image, FALSE);

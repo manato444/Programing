@@ -7,6 +7,8 @@ bool InputControl::old_button[16] = {};
 float InputControl::trigger[2] = {};
 Vector2D InputControl::stick[2] = {};
 
+float InputControl::stick1[2] = {};
+
 
 //入力機能：更新処理
 void InputControl::Update()
@@ -26,6 +28,9 @@ void InputControl::Update()
 	trigger[0] = (float)input_state.LeftTrigger / (float)UCHAR_MAX;
 	trigger[1] = (float)input_state.RightTrigger / (float)UCHAR_MAX;
 
+	stick1[0] = input_state.ThumbLX / (float)SHRT_MAX;
+
+	/*
 	//左スティックの入力値の更新（-1.0f～1.0fに範囲を制限する）
 	if (input_state.ThumbLX > 0.0f)
 	{
@@ -61,6 +66,7 @@ void InputControl::Update()
 	{
 		stick[1].y = -((float)input_state.ThumbRY / (float)SHRT_MIN);
 	}
+	*/
 }
 
 //ボタン取得：押している間
@@ -93,10 +99,19 @@ float InputControl::GetRightTrigger()
 	return trigger[1];
 }
 
+/*******************************
 //左スティック取得
 Vector2D InputControl::GetLeftStick()
 {
 	return stick[0];
+}
+*******************************/
+
+//左スティック取得
+float InputControl::GetLeft_Stick()
+{
+	return stick1[0];
+	
 }
 
 //右スティック取得

@@ -1,6 +1,7 @@
 #pragma once
 
 #include"../Utility/Vector2D.h"
+//#include"../Utility/InputControl.h"
 #include"Barrier.h"
 
 class Player
@@ -53,4 +54,7 @@ private:
 	
 	//â¡ë¨èàóù
 	void Acceleration();
+
+	static float SetLeft_Stick();
+	static float stick2[2];
 };

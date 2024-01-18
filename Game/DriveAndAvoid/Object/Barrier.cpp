@@ -1,7 +1,7 @@
 #include"Barrier.h"
 #include"DxLib.h"
 
-Barrier::Barrier() : image(NULL), life_span(2000)
+Barrier::Barrier() : image(NULL), life_span(8000)
 {
 	//‰æ‘œ‚Ì“Ç‚İ‚İ
 	image = LoadGraph("Resource/images/barrier.png");
@@ -22,6 +22,9 @@ Barrier::~Barrier()
 //•`‰æˆ—
 void Barrier::Draw(const Vector2D& location)
 {
+	//“øF`
+	GraphFilter(image, DX_GRAPH_FILTER_HSB, 0, 5, 8, 0);
+
 	DrawRotaGraph(location.x, location.y, 1.0, 0.0, image, TRUE);
 }
 
