@@ -1,8 +1,8 @@
-/*
+
 #include"Item.h"
 #include"DxLib.h"
 
-Item::Item(int type, int handle) : type(type), image(handle),
+Item::Item() : image(),
 speed(0.0f), location(0.0f), box_size(0.0f)
 {
 }
@@ -25,14 +25,14 @@ void Item::Initialize()
 	box_size = Vector2D(20.0f, 30.0f);
 
 	//‘¬‚³‚ÌÝ’è
-	speed = (float)(this->type * 2);
+	speed = 20;//(float)(this->type * 2);
 
 }
 
 void Item::Update(float speed)
 {
 	//ˆÊ’uî•ñ‚ÉˆÚ“®—Ê‚ð‰ÁŽZ‚·‚é
-	location += Vector2D(0.0f, this->speed + speed - 27);
+	location += Vector2D(0.0f, this->speed + speed - 25);
 }
 
 void Item::Draw() const
@@ -63,4 +63,3 @@ Vector2D Item::GetBoxSize() const
 {
 	return box_size;
 }
-*/

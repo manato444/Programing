@@ -1,4 +1,4 @@
-/*
+
 #pragma once
 
 #include"../Utility/Vector2D.h"
@@ -16,7 +16,7 @@ private:
 public:
 
 	//コンストラクタ(インスタンス生成時に最初に呼ばれる関数)
-	Item(int type, int handle);
+	Item();
 
 	//デストラクタ
 	~Item();
@@ -31,4 +31,3 @@ public:
 	Vector2D GetBoxSize() const;	//当たり判定の大きさを取得
 
 };
-*/

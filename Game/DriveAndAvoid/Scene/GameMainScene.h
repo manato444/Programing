@@ -18,7 +18,7 @@ private:
 	Player* player;		 //プレイヤー
 	Enemy** enemy;		 //敵
 
-	//Item** item;		//アイテム
+	Item* item;		//アイテム
 	//int item_image[1];
 	//int item_count[1];
 
@@ -45,6 +45,6 @@ private:
 
 	//当たり判定
 	bool IsHitCheck(Player* p, Enemy* e);
-	//bool IsHitCheck(Player* p, Item* i);
+	bool IsHitCheck(Player* p, Item* i);
 };
 

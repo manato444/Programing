@@ -6,7 +6,7 @@
 
 
 GameMainScene::GameMainScene() : high_score(0), back_ground(NULL), barrier_image(NULL), image(NULL),
-								sound(NULL), mileage(0), player(nullptr), enemy(nullptr)//, item(nullptr)
+								sound(NULL), mileage(0), player(nullptr), enemy(nullptr), item(nullptr)
 {
 	for (int i = 0; i < 3; i++)
 	{
@@ -34,7 +34,7 @@ void GameMainScene::Initialize()
 	back_ground = LoadGraph("Resource/images/back.bmp");
 	barrier_image = LoadGraph("Resource/images/barrier.png");
 	int result = LoadDivGraph("Resource/images/car.bmp", 3, 3, 1, 63, 120, enemy_image); 
-	//int item1 = LoadDivGraph("Resource/images/gasoline.bmp", 3, 3, 1, 63, 120, item_image);
+	int item_image = LoadGraph("Resource/images/gasoline.bmp");
 
 
 	image = LoadGraph("Resource/images/supana.bmp");
@@ -43,7 +43,7 @@ void GameMainScene::Initialize()
 	sound = LoadSoundMem("Resource/images/BreakItDown.mp3");
 	//sound = LoadSoundMem("Resource/images/HappyMoment.mp3");
 
-	ChangeVolumeSoundMem(255 * 80 / 100, sound);
+	ChangeVolumeSoundMem(255 * 70 / 100, sound);
 
 	//エラーチェック
 	if (back_ground == -1)
@@ -60,15 +60,22 @@ void GameMainScene::Initialize()
 	{
 		throw("Resource/images/barrier.pngがありません\n");
 	}
+	if (item_image == -1)
+	{
+		throw("Resource/images/gasoline.bmpがありません");
+	}
+
 
 	//オブジェクトの生成
 	player = new Player;
 	enemy = new Enemy* [10];
 
-	//item = new Item* [10];
+	item = new Item;
 
 	//オブジェクトの初期化
 	player->Initialize();
+
+	//item->Initialize();
 
 	for (int i = 0; i < 10; i++)
 	{
@@ -102,51 +109,62 @@ eSceneType GameMainScene::Update()
 		}
 	}
 
-	/*//アイテム生成
+	//アイテム生成
 	if (mileage / 20 % 35 == 0)
 	{
 		for (int i = 0; i < 10; i++)
 		{
-			if (item[i] == nullptr)
+			if (item == nullptr)
 			{
 				int type = GetRand(2) % 2;
-				item[i] = new Item(type, item_image[type]);
-				item[i]->Initialize();
+				item = new Item();
+				item->Initialize();
 				break;
 			}
 		}
 	}
-	*/
+	
 
-	/*//アイテムの更新と当たり判定
+	//アイテムの更新と当たり判定
 	for (int i = 0; i < 10; i++)
 	{
-		if (item[i] != nullptr)
+		if (item != nullptr)
 		{
-			item[i]->Update(player->GetSpeed());
+			item->Update(player->GetSpeed());
 
-			//画面外に行ったら、敵を削除してスコア加算
-			if (item[i]->GetLocation().y >= 640.0f)
+			//画面外に行ったら、削除
+			if (item->GetLocation().y >= 640.0f)
 			{
-				item_count[item[i]->GetType()]++;
-				item[i]->Finalize();
-				delete item[i];
-				item[i] = nullptr;
+				//item_count[item->GetType()]++;
+				item->Finalize();
+				delete item;
+				item = nullptr;
 			}
 
 			//当たり判定の確認
-			if (IsHitCheck(player, item[i]))
+			if (IsHitCheck(player, item))
 			{
+				//player->SetActive(false);
+				if (player->GetFuel() < 85000.0f)
+				{
+					player->DecreaseFuel(+10000.0f);
 
-				player->SetActive(false);
-				player->DecreaseHp(-160.0f);
-				item[i]->Finalize();
-				delete item[i];
-				item[i] = nullptr;
+					if (player->GetFuel() > 85000.0f)
+					{
+						player->DecreaseFuel(85000.0f / player->GetFuel());
+
+					}
+				}
+				
+
+				
+				item->Finalize();
+				delete item;
+				item = nullptr;
 			}
 		}
 	}
-	*/
+	
 
 
 
@@ -216,15 +234,15 @@ void GameMainScene::Draw() const
 		}
 	}
 
-	/*/アイテム描画
+	//アイテム描画
 	for (int i = 0; i < 10; i++)
 	{
-		if (item[i] != nullptr)
+		if (item != nullptr)
 		{
-			item[i]->Draw();
+			item->Draw();
 		}
 	}
-	*/
+	
 
 
 	//プレイヤーの描画
@@ -272,7 +290,7 @@ void GameMainScene::Draw() const
 	float fx = 510.0f;
 	float fy = 390.0f;
 	DrawFormatStringF(fx, fy, GetColor(0, 0, 0), "FUEL METER");
-	DrawBoxAA(fx, fy + 20.0f, fx + (player->GetFuel() * 100 / 85000), fy + 40.0f,
+	DrawBoxAA(fx, fy + 20.0f, fx + (player->GetFuel() * 100 / player->SetFuel()), fy + 40.0f,
 			  GetColor(0, 230, 0), TRUE);
 	DrawBoxAA(fx, fy + 20.0f, fx + 100.0f, fy + 40.0f, GetColor(0, 0, 0), FALSE);
 	
@@ -335,18 +353,18 @@ void GameMainScene::Finalize()
 			enemy[i] = nullptr;
 		}
 	}
-	/*
+	
 	for (int i = 0; i < 10; i++)
 	{
-		if (item[i] != nullptr)
+		if (item != nullptr)
 		{
-			item[i]->Finalize();
-			delete item[i];
-			item[i] = nullptr;
+			item->Finalize();
+			delete item;
+			item = nullptr;
 		}
 	}
-	delete[] item;
-	*/
+	delete item;
+	
 	delete[] enemy;
 	
 }
@@ -394,7 +412,7 @@ bool GameMainScene::IsHitCheck(Player* p, Enemy* e)
 }
 
 
-/*//アイテム当たり判定
+//アイテム当たり判定
 bool GameMainScene::IsHitCheck(Player* p, Item* i)
 {
 
@@ -413,4 +431,3 @@ bool GameMainScene::IsHitCheck(Player* p, Item* i)
 	//コリジョンデータより位置情報の差分が小さいなら、ヒット判定とする
 	return ((fabsf(diff_location.x) < box_ex.x) && (fabsf(diff_location.y) < box_ex.y));
 }
-*/

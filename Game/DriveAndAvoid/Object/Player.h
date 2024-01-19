@@ -19,6 +19,8 @@ private:
 	int barrier_count;		//バリアの枚数
 	Barrier* barrier;		//バリア
 
+	float fuel_max;
+
 public:
 
 	//コンストラクタ(インスタンス生成時に最初に呼ばれる関数)
@@ -36,6 +38,9 @@ public:
 
 	void SetActive(bool flg);		//有効フラグ設定
 	void DecreaseHp(float value);	//体力減少処理
+	void DecreaseFuel(float value);			//
+
+	float SetFuel();
 
 	Vector2D GetLocation() const;	//位置座標取得
 	Vector2D GetBoxSize() const;	//当たり判定の大きさ取得

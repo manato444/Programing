@@ -26,7 +26,9 @@ void Player::Initialize()
 	speed = 3.0f;
 	hp = 1000;
 	fuel = 85000;
+	//fuel_max = 85000;
 	barrier_count = 3;
+	fuel_max = fuel;
 
 	//‰æ‘œ‚Ì“Ç‚İ‚İ
 	image = LoadGraph("Resource/images/car1pol.bmp");
@@ -137,6 +139,16 @@ void Player::DecreaseHp(float value)
 	this->hp += value;
 }
 
+void Player::DecreaseFuel(float value)
+{
+	this->fuel += value;
+}
+
+float Player::SetFuel()
+{
+	return this->fuel_max;
+}
+
 //ˆÊ’uî•ñæ“¾ˆ—
 Vector2D Player::GetLocation() const
 {
@@ -159,6 +171,7 @@ float Player::GetSpeed() const
 float Player::GetFuel() const
 {
 	return this->fuel;
+	//return GetFuel();
 }
 
 //‘Ì—Íæ“¾ˆ—
