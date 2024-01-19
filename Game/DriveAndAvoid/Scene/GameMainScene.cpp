@@ -13,7 +13,7 @@ GameMainScene::GameMainScene() : high_score(0), back_ground(NULL), barrier_image
 		enemy_image[i] = NULL;
 		enemy_count[i] = NULL;
 
-		//item_image[i] = NULL;
+		item_image = NULL;
 		//item_count[i] = NULL;
 	}
 }
@@ -34,14 +34,17 @@ void GameMainScene::Initialize()
 	back_ground = LoadGraph("Resource/images/back.bmp");
 	barrier_image = LoadGraph("Resource/images/barrier.png");
 	int result = LoadDivGraph("Resource/images/car.bmp", 3, 3, 1, 63, 120, enemy_image); 
-	int item_image = LoadGraph("Resource/images/gasoline.bmp");
+	item_image = LoadGraph("Resource/images/gasoline.bmp");
 
+	//item_image = LoadGraph("Resource/images/supana.bmp");
 
 	image = LoadGraph("Resource/images/supana.bmp");
 
 	//BGM
-	sound = LoadSoundMem("Resource/images/BreakItDown.mp3");
-	//sound = LoadSoundMem("Resource/images/HappyMoment.mp3");
+	sound = LoadSoundMem("Resource/sound/BreakItDown.mp3");
+	//sound = LoadSoundMem("Resource/sound/HappyMoment.mp3");
+
+
 
 	ChangeVolumeSoundMem(255 * 70 / 100, sound);
 
@@ -70,7 +73,7 @@ void GameMainScene::Initialize()
 	player = new Player;
 	enemy = new Enemy* [10];
 
-	item = new Item;
+	item = new Item(item_image);
 
 	//オブジェクトの初期化
 	player->Initialize();
@@ -81,6 +84,11 @@ void GameMainScene::Initialize()
 	{
 		enemy[i] = nullptr;
 	}
+	for (int i = 0; i < 10; i++)
+	{
+		item = nullptr;
+	}
+
 }
 
 //更新処理
@@ -110,14 +118,14 @@ eSceneType GameMainScene::Update()
 	}
 
 	//アイテム生成
-	if (mileage / 20 % 35 == 0)
+	if (mileage / 20 % 300 == 0)
 	{
 		for (int i = 0; i < 10; i++)
 		{
 			if (item == nullptr)
 			{
-				int type = GetRand(2) % 2;
-				item = new Item();
+				int type = item_image;
+				item = new Item(item_image);
 				item->Initialize();
 				break;
 			}
@@ -144,10 +152,10 @@ eSceneType GameMainScene::Update()
 			//当たり判定の確認
 			if (IsHitCheck(player, item))
 			{
-				//player->SetActive(false);
+				player->FuelUp();
 				if (player->GetFuel() < 85000.0f)
 				{
-					player->DecreaseFuel(+10000.0f);
+					player->DecreaseFuel(+5000.0f);
 
 					if (player->GetFuel() > 85000.0f)
 					{
@@ -155,9 +163,6 @@ eSceneType GameMainScene::Update()
 
 					}
 				}
-				
-
-				
 				item->Finalize();
 				delete item;
 				item = nullptr;
@@ -190,6 +195,7 @@ eSceneType GameMainScene::Update()
 
 				player->SetActive(false);
 				player->DecreaseHp(-160.0f);
+				player->CarCrash();
 				enemy[i]->Finalize();
 				delete enemy[i];
 				enemy[i] = nullptr;

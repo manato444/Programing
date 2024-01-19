@@ -21,6 +21,9 @@ private:
 
 	float fuel_max;
 
+	int sound_c;	//クラッシュ効果音
+	int sound_f;	//燃料回復効果音
+
 public:
 
 	//コンストラクタ(インスタンス生成時に最初に呼ばれる関数)
@@ -38,7 +41,10 @@ public:
 
 	void SetActive(bool flg);		//有効フラグ設定
 	void DecreaseHp(float value);	//体力減少処理
-	void DecreaseFuel(float value);			//
+	void DecreaseFuel(float value);			//減少じゃなくて増やす処理です
+
+	void CarCrash();
+	void FuelUp();
 
 	float SetFuel();
 

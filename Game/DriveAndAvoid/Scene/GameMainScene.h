@@ -19,7 +19,7 @@ private:
 	Enemy** enemy;		 //“G
 
 	Item* item;		//ƒAƒCƒeƒ€
-	//int item_image[1];
+	int item_image;
 	//int item_count[1];
 
 	int sound; //BGM

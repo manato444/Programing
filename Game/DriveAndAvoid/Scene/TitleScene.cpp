@@ -25,6 +25,9 @@ void TitleScene::Initialize()
 	menu_image = LoadGraph("Resource/images/menu.bmp");
 	cursor_image = LoadGraph("Resource/images/cone.bmp");
 
+	//効果音
+	sound = LoadSoundMem("Resource/sound/engine.mp3");
+
 	//エラーチェック
 	if (background_image == -1)
 	{
@@ -70,6 +73,8 @@ eSceneType TitleScene::Update()
 	//カーソル決定(決定した画面に遷移する)
 	if (InputControl::GetButtonDown(XINPUT_BUTTON_B))
 	{
+		PlaySoundMem(sound, TRUE);
+		
 		switch (menu_cursor) 
 		{
 		case 0:

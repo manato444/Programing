@@ -16,7 +16,7 @@ private:
 public:
 
 	//コンストラクタ(インスタンス生成時に最初に呼ばれる関数)
-	Item();
+	Item(int type);
 
 	//デストラクタ
 	~Item();

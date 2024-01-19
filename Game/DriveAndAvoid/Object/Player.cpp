@@ -27,7 +27,7 @@ void Player::Initialize()
 	hp = 1000;
 	fuel = 85000;
 	//fuel_max = 85000;
-	barrier_count = 3;
+	barrier_count = 4;
 	fuel_max = fuel;
 
 	//画像の読み込み
@@ -35,6 +35,9 @@ void Player::Initialize()
 	//image = LoadGraph("Resource/images/gentuki.bmp");
 	//image = LoadGraph("Resource/images/car1.bmp");
 
+	//効果音
+	sound_c = LoadSoundMem("Resource/sound/carcrash.mp3");
+	sound_f = LoadSoundMem("Resource/sound/Fuelup.mp3");
 
 
 	//エラーチェック
@@ -44,13 +47,15 @@ void Player::Initialize()
 	}
 }
 
+
 //更新処理
 void Player::Update()
 {
-
+	
 	//操作不可状態であれば、自身を回転させる
 	if (!is_active)
 	{
+		
 		angle += DX_PI_F / 10.0f;
 		speed = 1.0f;
 
@@ -144,6 +149,22 @@ void Player::DecreaseFuel(float value)
 	this->fuel += value;
 }
 
+//クラッシュ効果音
+void Player::CarCrash()
+{
+	if (!is_active)
+	{
+		PlaySoundMem(sound_c, TRUE);
+	}
+}
+
+//燃料回復効果音
+void Player::FuelUp()
+{
+	PlaySoundMem(sound_f, TRUE);
+}
+
+//なんだっけ
 float Player::SetFuel()
 {
 	return this->fuel_max;

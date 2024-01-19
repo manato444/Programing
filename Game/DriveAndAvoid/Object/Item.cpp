@@ -2,7 +2,7 @@
 #include"Item.h"
 #include"DxLib.h"
 
-Item::Item() : image(),
+Item::Item(int type) : type(type), image(NULL),
 speed(0.0f), location(0.0f), box_size(0.0f)
 {
 }
@@ -15,6 +15,8 @@ Item::~Item()
 void Item::Initialize()
 {
 
+	image = LoadGraph("Resource/images/gasoline.bmp");
+
 	//出現させるX座標パターンを取得
 	float random_x = (float)(GetRand(4) * 105 + 40);
 
@@ -25,14 +27,14 @@ void Item::Initialize()
 	box_size = Vector2D(20.0f, 30.0f);
 
 	//速さの設定
-	speed = 20;//(float)(this->type * 2);
+	speed = 0.5f; // (float)(this->type * 2);
 
 }
 
 void Item::Update(float speed)
 {
 	//位置情報に移動量を加算する
-	location += Vector2D(0.0f, this->speed + speed - 25);
+	location += Vector2D(0.0f, this->speed);// +speed - 28);
 }
 
 void Item::Draw() const
@@ -46,7 +48,7 @@ void Item::Finalize()
 {
 }
 
-//敵のタイプを取得
+//タイプを取得
 int Item::GetType() const
 {
 	return type;
