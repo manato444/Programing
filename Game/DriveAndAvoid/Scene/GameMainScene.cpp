@@ -103,7 +103,7 @@ eSceneType GameMainScene::Update()
 	mileage += (int)player->GetSpeed() + 2;
 
 	//“G¶¬ˆ—
-	if (mileage / 20 % 35 == 0)
+	if (mileage / 20 % 60 == 0)
 	{
 		for (int i = 0; i < 10; i++)
 		{
@@ -155,7 +155,7 @@ eSceneType GameMainScene::Update()
 				player->FuelUp();
 				if (player->GetFuel() < 85000.0f)
 				{
-					player->DecreaseFuel(+5000.0f);
+					player->DecreaseFuel(+7000.0f);
 
 					if (player->GetFuel() > 85000.0f)
 					{

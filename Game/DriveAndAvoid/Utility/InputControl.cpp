@@ -28,8 +28,8 @@ void InputControl::Update()
 	trigger[0] = (float)input_state.LeftTrigger / (float)UCHAR_MAX;
 	trigger[1] = (float)input_state.RightTrigger / (float)UCHAR_MAX;
 
-	stick1[0] = input_state.ThumbLX / (float)SHRT_MAX * 3;
-	stick1[1] = input_state.ThumbLY / (float)SHRT_MAX * 3;
+	stick1[0] = input_state.ThumbLX / (float)SHRT_MAX * 3.5f;
+	stick1[1] = input_state.ThumbLY / (float)SHRT_MAX * 3.5f;
 
 
 	/*
