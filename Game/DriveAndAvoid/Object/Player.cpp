@@ -23,7 +23,7 @@ void Player::Initialize()
 	location = Vector2D(320.0f, 380.0f);
 	box_size = Vector2D(26.0f, 54.0f);
 	angle = 0.0f;
-	speed = 3.0f;
+	speed = 23.3f;
 	hp = 1000;
 	fuel = 85000;
 	//fuel_max = 85000;
@@ -62,6 +62,8 @@ void Player::Update()
 		if (angle >= DX_PI_F * 4.0f)
 		{
 			is_active = true;
+				GraphFilter(image, DX_GRAPH_FILTER_INVERT);
+			
 		}
 		return;
 	}
@@ -72,7 +74,8 @@ void Player::Update()
 	//移動処理
 	Movement();
 
-	SetLeft_Stick();
+	SetLeft_Stick_X();
+	SetLeft_Stick_Y();
 
 	//加減速処理
 	Acceleration();
@@ -155,6 +158,8 @@ void Player::CarCrash()
 	if (!is_active)
 	{
 		PlaySoundMem(sound_c, TRUE);
+		GraphFilter(image, DX_GRAPH_FILTER_INVERT);
+		
 	}
 }
 
@@ -215,11 +220,19 @@ bool Player::IsBarrier() const
 
 
 //左スティックの値をセット
-float Player::SetLeft_Stick()
+float Player::SetLeft_Stick_X()
 {
-	stick2[0] = InputControl::GetLeft_Stick();
+	stick2[0] = InputControl::GetLeft_Stick_X();
 	
 	return stick2[0];
+}
+
+//右スティックの値をセット
+float Player::SetLeft_Stick_Y()
+{
+	stick2[1] = InputControl::GetLeft_Stick_Y();
+
+	return stick2[1];
 }
 
 
@@ -229,7 +242,7 @@ void Player::Movement()
 {
 	float x, y;
 
-	Vector2D move = Vector2D(0.0f);
+	Vector2D move = Vector2D(0.0f, 0.0f);
 	angle = 0.0f;
 
 	//十字移動処理
@@ -252,31 +265,27 @@ void Player::Movement()
 	{
 		move += Vector2D(0.0f, 3.0f);
 	}
-	if(InputControl::GetLeft_Stick)
+	if (InputControl::GetLeft_Stick_X)
 	{
 		move += Vector2D(stick2[0], 0.0f);
 
 		if (stick2[0] >= 0.2f)
 		{
 			angle = DX_PI_F / 30;
-			barrier != nullptr;
-			barrier = new Barrier;
 		}
 		else if (stick2[0] <= -0.2f)
 		{
-			
 			angle = -DX_PI_F / 30;
-			barrier != nullptr;
-			barrier = new Barrier;
 		}
 		else if (stick2[0] == 0.0f)
 		{
-		
 			angle = -DX_PI_F / 30;
-			barrier == nullptr;
-			delete barrier;
 		}
+	}
 
+	if (InputControl::GetLeft_Stick_Y)
+	{
+		move -= Vector2D(0.0f, stick2[1]);
 	}
 
 	location += move;

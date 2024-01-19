@@ -46,6 +46,7 @@ void Item::Draw() const
 
 void Item::Finalize()
 {
+
 }
 
 //ƒ^ƒCƒv‚ðŽæ“¾

@@ -32,7 +32,8 @@ public:
 	static Vector2D GetLeftStick();			//左スティック
 	static Vector2D GetRightStick();		//右スティック
 
-	static float GetLeft_Stick();
+	static float GetLeft_Stick_X();
+	static float GetLeft_Stick_Y();
 	
 	//static float SetLeft_Stick();
 
