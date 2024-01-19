@@ -19,8 +19,8 @@ void TitleScene::Initialize()
 
 	
 	//‰æ‘œ‚Ì“Ç‚İ‚İ
-	background_image = LoadGraph("Resource/images/Title.bmp");
-	//background_image = LoadGraph("Resource/images/End.bmp");
+	//background_image = LoadGraph("Resource/images/Title.bmp");
+	background_image = LoadGraph("Resource/images/End.bmp");
 
 	menu_image = LoadGraph("Resource/images/menu.bmp");
 	cursor_image = LoadGraph("Resource/images/cone.bmp");

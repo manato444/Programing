@@ -3,6 +3,7 @@
 #include"SceneBase.h"
 #include"../Object/Player.h"
 #include"../Object/Enemy.h"
+#include"../Object/Item.h"
 
 class GameMainScene : public SceneBase
 {
@@ -16,6 +17,10 @@ private:
 	int enemy_count[3];	 //通り過ぎた敵カウント
 	Player* player;		 //プレイヤー
 	Enemy** enemy;		 //敵
+
+	//Item** item;		//アイテム
+	//int item_image[1];
+	//int item_count[1];
 
 	int sound; //BGM
 	int image;
@@ -40,5 +45,6 @@ private:
 
 	//当たり判定
 	bool IsHitCheck(Player* p, Enemy* e);
+	//bool IsHitCheck(Player* p, Item* i);
 };
 
