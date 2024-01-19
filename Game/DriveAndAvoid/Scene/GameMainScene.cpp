@@ -41,8 +41,8 @@ void GameMainScene::Initialize()
 	image = LoadGraph("Resource/images/supana.bmp");
 
 	//BGM
-	sound = LoadSoundMem("Resource/sound/BreakItDown.mp3");
-	//sound = LoadSoundMem("Resource/sound/HappyMoment.mp3");
+	//sound = LoadSoundMem("Resource/sound/BreakItDown.mp3");
+	sound = LoadSoundMem("Resource/sound/HappyMoment.mp3");
 
 
 
@@ -155,7 +155,7 @@ eSceneType GameMainScene::Update()
 				player->FuelUp();
 				if (player->GetFuel() < 85000.0f)
 				{
-					player->DecreaseFuel(+7000.0f);
+					player->DecreaseFuel(+5000.0f);
 
 					if (player->GetFuel() > 85000.0f)
 					{
