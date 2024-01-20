@@ -42,11 +42,11 @@ void GameMainScene::Initialize()
 
 	//BGM
 	//sound = LoadSoundMem("Resource/sound/BreakItDown.mp3");
-	sound = LoadSoundMem("Resource/sound/HappyMoment.mp3");
-
-
+	//sound = LoadSoundMem("Resource/sound/HappyMoment.mp3");
+	sound = LoadSoundMem("Resource/sound/LoveAndGold.mp3");
 
 	ChangeVolumeSoundMem(255 * 70 / 100, sound);
+
 
 	//エラーチェック
 	if (back_ground == -1)
