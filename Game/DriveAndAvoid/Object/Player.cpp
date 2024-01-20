@@ -57,7 +57,7 @@ void Player::Update()
 	{
 		
 		angle += DX_PI_F / 10.0f;
-		speed = 1.0f;
+		speed = 8.0f;
 
 		if (angle >= DX_PI_F * 4.0f)
 		{
