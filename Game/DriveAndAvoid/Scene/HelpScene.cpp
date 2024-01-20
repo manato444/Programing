@@ -13,7 +13,6 @@ HelpScene::~HelpScene()
 //初期化処理
 void HelpScene::Initialize()
 {
-
 	//画像の読み込み
 	background_image = LoadGraph("Resource/images/Title.bmp");
 
@@ -28,20 +27,17 @@ void HelpScene::Initialize()
 //更新処理
 eSceneType HelpScene::Update()
 {
-
 	//Bボタンが押されたら、タイトルに戻る
 	if (InputControl::GetButtonDown(XINPUT_BUTTON_B))
 	{
 		return eSceneType::E_TITLE;
 	}
-	
 	return GetNowScene();
 }
 
 //描画処理
 void HelpScene::Draw() const
 {
-
 	//背景画像の描画
 	DrawGraph(0, 0, background_image, FALSE);
 

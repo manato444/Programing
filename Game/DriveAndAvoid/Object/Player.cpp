@@ -75,18 +75,20 @@ void Player::Update()
 	//移動処理
 	Movement();
 
+	//取得した左スティックの値をセットする
 	SetLeft_Stick_X();
 	SetLeft_Stick_Y();
 
 	//加減速処理
 	Acceleration();
 
+	//STARTボタンで回転する（多分）
 	if (InputControl::GetButtonDown(XINPUT_BUTTON_START))
 	{
 		is_active = false;
 	}
 
-	//バリア処理
+	//バリア処理(Bボタン)
 	if (InputControl::GetButtonDown(XINPUT_BUTTON_B) && barrier_count > 0)
 	{
 		if (barrier == nullptr)
@@ -99,7 +101,6 @@ void Player::Update()
 	//バリアが生成されたら、更新を行う
 	if (barrier != nullptr)
 	{
-
 		//バリア時間が経過したか？していたら、削除する
 		if (barrier->IsFinished(this->speed))
 		{
@@ -112,7 +113,6 @@ void Player::Update()
 //描画処理
 void Player::Draw()
 {
-	
 	//プレイヤー画像の描画
 	DrawRotaGraphF(location.x, location.y, 1.0, angle, image, TRUE);
 
@@ -148,6 +148,7 @@ void Player::DecreaseHp(float value)
 	this->hp += value;
 }
 
+//燃料回復させるための処理（減少処理ではない）
 void Player::DecreaseFuel(float value)
 {
 	this->fuel += value;
@@ -235,8 +236,6 @@ float Player::SetLeft_Stick_Y()
 
 	return stick2[1];
 }
-
-
 
 //移動処理
 void Player::Movement()

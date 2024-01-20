@@ -48,7 +48,7 @@ public:
 	void CarCrash();	//クラッシュ
 	void FuelUp();		//燃料回復
 
-	float SetFuel();
+	float SetFuel();	//なんだっけ
 
 	Vector2D GetLocation() const;	//位置座標取得
 	Vector2D GetBoxSize() const;	//当たり判定の大きさ取得
@@ -68,7 +68,7 @@ private:
 	//加速処理
 	void Acceleration();
 
-	static float SetLeft_Stick_X();
-	static float SetLeft_Stick_Y();
+	static float SetLeft_Stick_X();	//左スティックX座標をセット
+	static float SetLeft_Stick_Y();	//左スティックY座標をセット
 	static float stick2[2];
 };

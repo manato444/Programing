@@ -22,7 +22,7 @@ Barrier::~Barrier()
 //描画処理
 void Barrier::Draw(const Vector2D& location)
 {
-	//虹色～
+	//バリア虹色
 	GraphFilter(image, DX_GRAPH_FILTER_HSB, 0, 5, 8, 0);
 
 	DrawRotaGraph(location.x, location.y, 1.0, 0.0, image, TRUE);

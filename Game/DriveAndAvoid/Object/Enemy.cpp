@@ -30,19 +30,12 @@ void Enemy::Initialize()
 
 void Enemy::Update(float speed)
 {
-	//int type = GetRand(3) % 3;
-
 	//位置情報に移動量を加算する
 	location += Vector2D(0.0f, this->speed + speed - 27);
-	
-
 }
 
 void Enemy::Draw() const
 {
-	//時間差で敵を虹色に(目がチカチカするこれ)
-	//GraphFilter(image, DX_GRAPH_FILTER_HSB, 0, 3, 8, 0);
-
 	//敵画像の描画
 	DrawRotaGraphF(location.x, location.y, 1.0, 0.0, image, TRUE);
 }

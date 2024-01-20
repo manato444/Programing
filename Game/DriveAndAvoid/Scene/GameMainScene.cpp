@@ -36,29 +36,28 @@ void GameMainScene::Initialize()
 	int result = LoadDivGraph("Resource/images/car.bmp", 3, 3, 1, 63, 120, enemy_image); 
 	item_image = LoadGraph("Resource/images/gasoline.bmp");
 
-	//item_image = LoadGraph("Resource/images/supana.bmp");
-
+	//item_image = LoadGraph("Resource/images/supana.bmp"); //コピペ用
+	
+	//↓飾り
 	image = LoadGraph("Resource/images/supana.bmp");
 
-	//BGM
+	//BGM(気分で変える)
 	//sound = LoadSoundMem("Resource/sound/BreakItDown.mp3");
 	//sound = LoadSoundMem("Resource/sound/HappyMoment.mp3");
 	sound = LoadSoundMem("Resource/sound/LoveAndGold.mp3");
 
+	//ボリューム（BGM）
 	ChangeVolumeSoundMem(255 * 70 / 100, sound);
-
 
 	//エラーチェック
 	if (back_ground == -1)
 	{
 		throw("Resource/images/back.bmpがありません\n");
 	}
-
 	if (result == -1)
 	{
 		throw("Resource/images/car.bmpがありません\n");
 	}
-
 	if (barrier_image == -1)
 	{
 		throw("Resource/images/barrier.pngがありません\n");
@@ -67,7 +66,6 @@ void GameMainScene::Initialize()
 	{
 		throw("Resource/images/gasoline.bmpがありません");
 	}
-
 
 	//オブジェクトの生成
 	player = new Player;
@@ -78,8 +76,6 @@ void GameMainScene::Initialize()
 	//オブジェクトの初期化
 	player->Initialize();
 
-	//item->Initialize();
-
 	for (int i = 0; i < 10; i++)
 	{
 		enemy[i] = nullptr;
@@ -88,12 +84,12 @@ void GameMainScene::Initialize()
 	{
 		item = nullptr;
 	}
-
 }
 
 //更新処理
 eSceneType GameMainScene::Update()
 {
+	//BGM再生
 	PlaySoundMem(sound, DX_PLAYTYPE_LOOP, FALSE);
 
 	//プレイヤーの更新
@@ -118,7 +114,7 @@ eSceneType GameMainScene::Update()
 	}
 
 	//アイテム生成
-	if (mileage / 20 % (GetRand(200) + 300) == 0)
+	if (mileage / 20 % (GetRand(250) + 250) == 0)
 	{
 		for (int i = 0; i < 10; i++)
 		{
@@ -132,7 +128,6 @@ eSceneType GameMainScene::Update()
 		}
 	}
 	
-
 	//アイテムの更新と当たり判定
 	for (int i = 0; i < 10; i++)
 	{
@@ -143,7 +138,7 @@ eSceneType GameMainScene::Update()
 			//画面外に行ったら、削除
 			if (item->GetLocation().y >= 640.0f)
 			{
-				//item_count[item->GetType()]++;
+				//item_count[item->GetType()]++;	//アイテム追加するとき多分使う
 				item->Finalize();
 				delete item;
 				item = nullptr;
@@ -155,12 +150,12 @@ eSceneType GameMainScene::Update()
 				player->FuelUp();
 				if (player->GetFuel() < 85000.0f)
 				{
+					//燃料回復
 					player->DecreaseFuel(+7000.0f);
 
-					if (player->GetFuel() > 85000.0f)
+					if (player->GetFuel() > 85000.0f)	
 					{
-						player->DecreaseFuel(85000.0f / player->GetFuel());
-
+						player->GetFuel();
 					}
 				}
 				item->Finalize();
@@ -192,7 +187,6 @@ eSceneType GameMainScene::Update()
 			//当たり判定の確認
 			if (IsHitCheck(player, enemy[i]))
 			{
-
 				player->SetActive(false);
 				player->DecreaseHp(-160.0f);
 				player->CarCrash();
@@ -209,6 +203,7 @@ eSceneType GameMainScene::Update()
 		WaitTimer(300);
 		return eSceneType::E_TITLE;
 	}
+
 	//Yボタンでリザルトへ
 	if (InputControl::GetButtonDown(XINPUT_BUTTON_Y))
 	{
@@ -249,18 +244,16 @@ void GameMainScene::Draw() const
 		}
 	}
 	
-
-
 	//プレイヤーの描画
 	player->Draw();
 
 	//UIの描画
-	DrawBox(500, 0, 640, 480, GetColor(0, 0, 250), TRUE);
+	DrawBox(500, 0, 640, 480, GetColor(0, 0, 250), TRUE);	//右側の青い部分
 
-	DrawBox(500, 0, 640, 70, GetColor(255, 255, 255), TRUE);
-	DrawBox(500, 10, 640, 60, GetColor(100, 100, 100), TRUE);
+	DrawBox(500, 0, 640, 70, GetColor(255, 255, 255), TRUE);	//ハイスコア表示領域
+	DrawBox(500, 10, 640, 60, GetColor(100, 100, 100), TRUE);	//　　　;;
 
-	DrawGraph(580, 338, image, TRUE);
+	DrawGraph(580, 338, image, TRUE);	//飾り
 
 
 	SetFontSize(16);
@@ -280,7 +273,7 @@ void GameMainScene::Draw() const
 	
 	DrawFormatString(510, 280, GetColor(0, 0, 0), "バリア");
 
-	/*
+	/*STARTボタンでタイトルへ
 	SetFontSize(15);
 	DrawFormatString(510, 340, 0xf6ff00, "'START'");
 	DrawFormatString(510, 360, 0xf6ff00, "'タイトルへ戻る'");
@@ -313,6 +306,7 @@ void GameMainScene::Draw() const
 //終了時処理
 void GameMainScene::Finalize()
 {
+	//BGMを止める
 	StopSoundMem(sound);
 
 	//スコアを計算する
@@ -370,9 +364,7 @@ void GameMainScene::Finalize()
 		}
 	}
 	delete item;
-	
 	delete[] enemy;
-	
 }
 
 //現在のシーン情報を取得

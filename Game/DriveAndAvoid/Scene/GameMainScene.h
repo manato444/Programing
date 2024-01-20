@@ -19,11 +19,12 @@ private:
 	Enemy** enemy;		 //敵
 
 	Item* item;		//アイテム
-	int item_image;
-	//int item_count[1];
+	int item_image;	//アイテム画像
+
+	//int item_count[1];	//アイテム追加したら多分使う
 
 	int sound; //BGM
-	int image;
+	int image;	//飾り(?)
 
 public:
 	GameMainScene();
@@ -41,7 +42,7 @@ private:
 	//ハイスコア読み込み処理
 	void ReadHighScore();
 
-	void GameCount();
+	void GameCount();	//なんでつくった
 
 	//当たり判定
 	bool IsHitCheck(Player* p, Enemy* e);

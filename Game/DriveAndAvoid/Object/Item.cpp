@@ -41,7 +41,6 @@ void Item::Draw() const
 {
 	//ƒAƒCƒeƒ€‰æ‘œ‚Ì•`‰æ
 	DrawRotaGraphF(location.x, location.y, 1.0, 0.0, image, TRUE);
-	//DrawGraph(location.x, location.y, image, TRUE);
 }
 
 void Item::Finalize()
