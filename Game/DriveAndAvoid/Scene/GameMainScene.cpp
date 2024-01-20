@@ -118,7 +118,7 @@ eSceneType GameMainScene::Update()
 	}
 
 	//ƒAƒCƒeƒ€¶¬
-	if (mileage / 20 % 500 == 0)
+	if (mileage / 20 % (GetRand(200) + 300) == 0)
 	{
 		for (int i = 0; i < 10; i++)
 		{
