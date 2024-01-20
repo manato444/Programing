@@ -25,7 +25,7 @@ void SceneManager::Initialize()
 	SetMainWindowText("Drive&Avoid");
 
 	//ウィンドウモードで起動
-	if (ChangeWindowMode(FALSE) != DX_CHANGESCREEN_OK)
+	if (ChangeWindowMode(TRUE) != DX_CHANGESCREEN_OK)
 	{
 		throw("ウィンドウモードで起動できませんでした\n");
 	}

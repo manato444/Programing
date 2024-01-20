@@ -20,10 +20,11 @@ void Player::Initialize()
 {
 
 	is_active = true;
-	location = Vector2D(320.0f, 380.0f);
+	//location = Vector2D(320.0f, 380.0f);
+	location = Vector2D(250.0f, 380.0f);
 	box_size = Vector2D(26.0f, 54.0f);
 	angle = 0.0f;
-	speed = 23.3f;
+	speed = 24.5f;
 	hp = 1000;
 	fuel = 85000;
 	//fuel_max = 85000;
