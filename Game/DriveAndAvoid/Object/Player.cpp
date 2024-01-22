@@ -97,6 +97,17 @@ void Player::Update()
 			barrier = new Barrier;
 		}
 	}
+	/*
+	if (CheckHitKey(KEY_INPUT_SPACE) && barrier_count > 0)
+	{
+		if (barrier == nullptr)
+		{
+			barrier_count--;
+			barrier = new Barrier;
+		}
+	}
+	*/
+
 
 	//バリアが生成されたら、更新を行う
 	if (barrier != nullptr)
@@ -265,21 +276,23 @@ void Player::Movement()
 	{
 		move += Vector2D(0.0f, 3.0f);
 	}
+
+	//スティック移動処理
 	if (InputControl::GetLeft_Stick_X)
 	{
 		move += Vector2D(stick2[0], 0.0f);
 
 		if (stick2[0] >= 0.2f)
 		{
-			angle = DX_PI_F / 30;
+			angle = DX_PI_F / 25;
 		}
 		else if (stick2[0] <= -0.2f)
 		{
-			angle = -DX_PI_F / 30;
+			angle = -DX_PI_F / 25;
 		}
 		else if (stick2[0] == 0.0f)
 		{
-			angle = -DX_PI_F / 30;
+			angle = -DX_PI_F / 25;
 		}
 	}
 
@@ -287,6 +300,26 @@ void Player::Movement()
 	{
 		move -= Vector2D(0.0f, stick2[1]);
 	}
+	/*
+	if (CheckHitKey(KEY_INPUT_LEFT))
+	{
+		move += Vector2D(-3.0f, 0.0f);
+		angle = -DX_PI_F / 18;
+	}
+	if (CheckHitKey(KEY_INPUT_RIGHT))
+	{
+		move += Vector2D(3.0f, 0.0f);
+		angle = DX_PI_F / 18;
+	}
+	if (CheckHitKey(KEY_INPUT_UP))
+	{
+		move += Vector2D(0.0f, -3.0f);
+	}
+	if (CheckHitKey(KEY_INPUT_DOWN))
+	{
+		move += Vector2D(0.0f, 3.0f);
+	}
+	*/
 
 	location += move;
 
