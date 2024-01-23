@@ -32,6 +32,7 @@ public:
 	static Vector2D GetLeftStick();			//左スティック
 	static Vector2D GetRightStick();		//右スティック
 
+	//左スティック入力取得（X, Y）
 	static float GetLeft_Stick_X();
 	static float GetLeft_Stick_Y();
 	

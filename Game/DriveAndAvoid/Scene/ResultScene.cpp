@@ -139,7 +139,7 @@ void ResultScene::ReadResultData()
 	//避けた数と得点を取得
 	for (int i = 0; i < 3; i++)
 	{
-		fscanf_s(fp, "%6d", &enemy_count[i]);
+		fscanf_s(fp, "%6d\n", &enemy_count[i]);
 	}
 
 	//ファイルクローズ

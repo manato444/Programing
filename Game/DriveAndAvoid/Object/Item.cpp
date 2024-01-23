@@ -2,9 +2,10 @@
 #include"Item.h"
 #include"DxLib.h"
 
-Item::Item(int type) : type(type), image(NULL),
+Item::Item(int type) : type(type), image(),
 speed(0.0f), location(0.0f), box_size(0.0f)
 {
+	
 }
 
 Item::~Item()
@@ -15,7 +16,9 @@ Item::~Item()
 void Item::Initialize()
 {
 
-	image = LoadGraph("Resource/images/gasoline.bmp");
+		image[0] = LoadGraph("Resource/images/gasoline.bmp", image[0]);
+	
+
 
 	//出現させるX座標パターンを取得
 	float random_x = (float)(GetRand(4) * 105 + 40);
@@ -40,7 +43,7 @@ void Item::Update(float speed)
 void Item::Draw() const
 {
 	//アイテム画像の描画
-	DrawRotaGraphF(location.x, location.y, 1.0, 0.0, image, TRUE);
+	DrawRotaGraphF(location.x, location.y, 1.0, 0.0, image[0], TRUE);
 }
 
 void Item::Finalize()

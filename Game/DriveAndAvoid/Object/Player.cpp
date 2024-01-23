@@ -300,7 +300,7 @@ void Player::Movement()
 	{
 		move -= Vector2D(0.0f, stick2[1]);
 	}
-	/*
+	
 	if (CheckHitKey(KEY_INPUT_LEFT))
 	{
 		move += Vector2D(-3.0f, 0.0f);
@@ -319,7 +319,18 @@ void Player::Movement()
 	{
 		move += Vector2D(0.0f, 3.0f);
 	}
-	*/
+
+	if (CheckHitKey(KEY_INPUT_A))
+	{
+		move += Vector2D(-3.0f, 0.0f);
+		angle = -DX_PI_F / 18;
+	}
+	if (CheckHitKey(KEY_INPUT_D))
+	{
+		move += Vector2D(3.0f, 0.0f);
+		angle = DX_PI_F / 18;
+	}
+	
 
 	location += move;
 
@@ -366,4 +377,13 @@ void Player::Acceleration()
 		speed -= 0.3f;
 	}
 
+	if (CheckHitKey(KEY_INPUT_W) && speed <= 30.0f)
+	{
+		speed += 0.3f;
+	}
+	if (CheckHitKey(KEY_INPUT_S) && speed > 1.0f)
+	{
+		speed -= 0.3f;
+
+	}
 }

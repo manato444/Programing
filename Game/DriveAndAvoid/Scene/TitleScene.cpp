@@ -4,7 +4,7 @@
 
 
 
-TitleScene::TitleScene() : background_image(NULL), menu_image(NULL),
+TitleScene::TitleScene() : background_image(NULL), menu_image(NULL), sound(NULL),
 						   cursor_image(NULL), menu_cursor(0)
 {
 }
@@ -47,20 +47,29 @@ void TitleScene::Initialize()
 //更新処理
 eSceneType TitleScene::Update()
 {
-
+	bool flg = TRUE;
 	//カーソル下移動
-	if (InputControl::GetButtonDown(XINPUT_BUTTON_DPAD_DOWN))
+	if (InputControl::GetButtonDown(XINPUT_BUTTON_DPAD_DOWN) || CheckHitKey(KEY_INPUT_DOWN) > 0)
 	{
-		menu_cursor++;
+		if (flg == TRUE)
+		{
+			menu_cursor++;
+		}
+		else
+		{
+			flg = TRUE;
+		}
+		flg = FALSE;
 		//1番下に到達したら、一番上にする
 		if (menu_cursor > 3)
 		{
 			menu_cursor = 0;
 		}
+		
 	}
 
 	//カーソル上移動
-	if (InputControl::GetButtonDown(XINPUT_BUTTON_DPAD_UP))
+	if (InputControl::GetButtonDown(XINPUT_BUTTON_DPAD_UP) || CheckHitKey(KEY_INPUT_UP) > 0)
 	{
 		menu_cursor--;
 		//1番上に到達したら、一番下にする
@@ -71,7 +80,7 @@ eSceneType TitleScene::Update()
 	}
 
 	//カーソル決定(決定した画面に遷移する)
-	if (InputControl::GetButtonDown(XINPUT_BUTTON_B))
+	if (InputControl::GetButtonDown(XINPUT_BUTTON_B) || CheckHitKey(KEY_INPUT_RETURN))
 	{
 		PlaySoundMem(sound, TRUE);
 		

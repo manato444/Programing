@@ -5,15 +5,17 @@
 #include<math.h>
 
 
-GameMainScene::GameMainScene() : high_score(0), back_ground(NULL), barrier_image(NULL), image(NULL),
+GameMainScene::GameMainScene() : high_score(0), back_ground(NULL), barrier_image(NULL), image(NULL),item_image(NULL),
 								sound(NULL), mileage(0), player(nullptr), enemy(nullptr), item(nullptr)
 {
-	for (int i = 0; i < 3; i++)
+	int i;
+	//item_image[i] = NULL;
+	for (i = 0; i < 3; i++)
 	{
 		enemy_image[i] = NULL;
 		enemy_count[i] = NULL;
 
-		item_image = NULL;
+		
 		//item_count[i] = NULL;
 	}
 }
@@ -35,11 +37,13 @@ void GameMainScene::Initialize()
 	barrier_image = LoadGraph("Resource/images/barrier.png");
 	int result = LoadDivGraph("Resource/images/car.bmp", 3, 3, 1, 63, 120, enemy_image); 
 	item_image = LoadGraph("Resource/images/gasoline.bmp");
+	//item_image = LoadGraph("Resource/images/supana.bmp");
+
 
 	//item_image = LoadGraph("Resource/images/supana.bmp"); //コピペ用
 	
 	//↓飾り
-	image = LoadGraph("Resource/images/supana.bmp");
+	//image = LoadGraph("Resource/images/supana.bmp");
 
 	//BGM(気分で変える)
 	//sound = LoadSoundMem("Resource/sound/BreakItDown.mp3");
