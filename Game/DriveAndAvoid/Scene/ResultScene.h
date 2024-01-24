@@ -10,6 +10,7 @@ private:
 	int score;				//スコア
 	int enemy_count[3];		//敵のカウント
 	int enemy_image[3];		//敵画像
+	int mileage;
 
 public:
 

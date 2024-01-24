@@ -314,7 +314,9 @@ void GameMainScene::Finalize()
 	StopSoundMem(sound);
 
 	//スコアを計算する
-	int score = (mileage / 10 * 10);
+	mileage = mileage / 10;
+	int score = (mileage * 10);
+		
 	for (int i = 0; i < 3; i++)
 	{
 		score += (i + 1) * 50 * enemy_count[i];
@@ -333,12 +335,13 @@ void GameMainScene::Finalize()
 	}
 
 	//スコアを保存
-	fprintf(fp, "%d,", score);
+	fprintf(fp, "%d,\n", score);
+	fprintf(fp, "%d,\n", mileage);
 
 	//避けた数と得点を保存
 	for (int i = 0; i < 3; i++)
 	{
-		fprintf(fp, "%d,", enemy_count[i]);
+		fprintf(fp, "%d,\n", enemy_count[i]);
 	}
 
 	//ファイルクローズ

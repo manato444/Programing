@@ -3,7 +3,7 @@
 #include"../Utility/InputControl.h"
 #include"DxLib.h"
 
-ResultScene::ResultScene() : back_ground(NULL), score(0)
+ResultScene::ResultScene() : back_ground(NULL), score(0), mileage(0)
 {
 	for (int i = 0; i < 3; i++)
 	{
@@ -78,7 +78,7 @@ void ResultScene::Draw() const
 	DrawString(200, 160, "‚f‚`‚l‚d‚n‚u‚d‚q", GetColor(255, 0, 0));
 	SetFontSize(16);
 	DrawString(180, 200, "‘–s‹——£        ", GetColor(255, 255, 255));
-	DrawFormatString(240, 200, GetColor(255, 255, 255), " =%6d", enemy_count[0]);
+	DrawFormatString(260, 200, GetColor(255, 255, 255), "%6d x%4d=%6d", mileage, 10,  mileage * 10);
 
 
 	for (int i = 0; i < 3; i++)
@@ -86,14 +86,14 @@ void ResultScene::Draw() const
 		DrawRotaGraph(230, 230 + (i * 20), 0.3f, DX_PI_F / 2, enemy_image[i], TRUE);
 
 		DrawFormatString(260, 222 + (i * 21), GetColor(255, 255, 255), "%6d x%4d=%6d",
-			enemy_count[1], (i + 1) * 50, (i + 1) * 50 * enemy_count[i]);
+			enemy_count[i], (i + 1) * 50, (i + 1) * 50 * enemy_count[i]);
 
 		//DrawFormatString(260, 222 + (i * 21), GetColor(255, 255, 255), "%6d x%4d=%6d",
 			//enemy_count[i], (i + 1), (i + 1), enemy_count[i]);
 	}
 
 	DrawString(180, 290, "ƒXƒRƒA", GetColor(255, 255, 255));
-	DrawFormatString(180, 290, 0xFFFFFF, "            =%6d", &score);
+	DrawFormatString(260, 290, 0xFFFFFF, "            =%6d", score);
 
 	SetFontSize(15);
 	DrawString(340, 310, "'A'ƒ^ƒCƒgƒ‹‚Ö–ß‚é", GetColor(255, 100, 100));
@@ -134,13 +134,14 @@ void ResultScene::ReadResultData()
 	}
 
 	//Œ‹‰Ê‚ð“Ç‚Ýž‚Þ
-	fscanf_s(fp, "&6d,\n", &score);
-
+	fscanf_s(fp, "%6d,\n", &score);
+	fscanf_s(fp, "%6d,\n", &mileage);
 	//”ð‚¯‚½”‚Æ“¾“_‚ðŽæ“¾
 	for (int i = 0; i < 3; i++)
 	{
-		fscanf_s(fp, "%6d\n", &enemy_count[i]);
+		fscanf_s(fp, "%6d,\n", &enemy_count[i]);
 	}
+	
 
 	//ƒtƒ@ƒCƒ‹ƒNƒ[ƒY
 	fclose(fp);

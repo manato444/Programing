@@ -303,31 +303,31 @@ void Player::Movement()
 	
 	if (CheckHitKey(KEY_INPUT_LEFT))
 	{
-		move += Vector2D(-3.0f, 0.0f);
+		move += Vector2D(-3.5f, 0.0f);
 		angle = -DX_PI_F / 18;
 	}
 	if (CheckHitKey(KEY_INPUT_RIGHT))
 	{
-		move += Vector2D(3.0f, 0.0f);
+		move += Vector2D(3.5f, 0.0f);
 		angle = DX_PI_F / 18;
 	}
 	if (CheckHitKey(KEY_INPUT_UP))
 	{
-		move += Vector2D(0.0f, -3.0f);
+		move += Vector2D(0.0f, -3.5f);
 	}
 	if (CheckHitKey(KEY_INPUT_DOWN))
 	{
-		move += Vector2D(0.0f, 3.0f);
+		move += Vector2D(0.0f, 3.5f);
 	}
 
 	if (CheckHitKey(KEY_INPUT_A))
 	{
-		move += Vector2D(-3.0f, 0.0f);
+		move += Vector2D(-3.5f, 0.0f);
 		angle = -DX_PI_F / 18;
 	}
 	if (CheckHitKey(KEY_INPUT_D))
 	{
-		move += Vector2D(3.0f, 0.0f);
+		move += Vector2D(3.5f, 0.0f);
 		angle = DX_PI_F / 18;
 	}
 	
