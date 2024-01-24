@@ -38,7 +38,7 @@ void RankingData::Initialize()
 	//対象ファイルから読み込む
 	for (int i = 0; i < 5; i++)
 	{
-		fscanf_s(fp, "%6d,%2d,%s[＾,],\n", &score[i], &rank[i], name[i], 15);
+		fscanf_s(fp, "%6d,%2d,%s[^,],\n", &score[i], &rank[i], name[i], 15);
 	}
 
 	//ファイルクローズ
@@ -54,6 +54,7 @@ void RankingData::Initialize()
 void RankingData::Finalize()
 {
 }
+
 
 //データ設定処理
 void RankingData::SetRankingData(int score, const char* name)
@@ -145,3 +146,13 @@ void RankingData::SortData()
 	//ファイルクローズ
 	fclose(fp);
 }
+
+/******************
+* リセット用スコア
+* *****************
+50000,1,A,
+40000,2,B,
+30000,3,C,
+20000,4,D,
+10000,5,E,
+*******************/

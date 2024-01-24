@@ -11,6 +11,8 @@ private:
 	int enemy_count[3];		//“G‚ÌƒJƒEƒ“ƒg
 	int enemy_image[3];		//“G‰æ‘œ
 	int mileage;
+	//int background_image;
+
 
 public:
 

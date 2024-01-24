@@ -29,6 +29,7 @@ void RankingDispScene::Initialize()
 
 }
 
+
 //更新処理
 eSceneType RankingDispScene::Update()
 {
@@ -52,9 +53,11 @@ void RankingDispScene::Draw() const
 	//取得したランキングデータを描画する
 	for (int i = 0; i < 5; i++)
 	{
-		DrawFormatString(50, 170 + i * 25, 0xffffff, "%2d %-15s %6d", 
+		DrawFormatString(50, 170 + i * 25, 0xffffff, "%2d, %-15s %6d", 
 			ranking->GetRank(i), ranking->GetName(i), ranking->GetScore(i));
 	}
+
+	DrawString(150, 450, "---- Bボタンを押してタイトルへ戻る ----", 0xffffff, 0);
 }
 
 //終了時処理

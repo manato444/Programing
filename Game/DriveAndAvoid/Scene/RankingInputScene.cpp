@@ -109,9 +109,11 @@ void RankingInputScene::Draw() const
 		{
 			DrawBox(35, 400, 35 + font_size * 2, 400 + font_size, GetColor(255, 255, 255), FALSE);
 		}
-		else
+		else if(cursor_x == 1)
 		{
-			DrawBox(0, 0, font_size, font_size, GetColor(255, 255, 255), FALSE);
+			DrawBox(40 * 2, 400, 35 + font_size * 4,  400 + font_size, GetColor(255, 255, 255), FALSE);
+
+			//DrawBox(0, 0, font_size, font_size, GetColor(255, 255, 255), FALSE);
 		}
 	}
 }
@@ -211,12 +213,14 @@ bool RankingInputScene::InputName()
 			{
 				name[name_num] = '\0';
 				return true;
+
 			}
-			else
+			if(cursor_x == 1)
 			{
-				name[name_num--] = NULL;
+				name[name_num--] = '\0';
 			}
 		}
+
 	}
 	
 	return false;

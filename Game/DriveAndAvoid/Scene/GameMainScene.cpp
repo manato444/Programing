@@ -53,6 +53,10 @@ void GameMainScene::Initialize()
 	//ボリューム（BGM）
 	ChangeVolumeSoundMem(255 * 70 / 100, sound);
 
+	GraphFilter(back_ground, DX_GRAPH_FILTER_LEVEL, 35, 210, 120, 0, 255);
+	GraphFilter(back_ground, DX_GRAPH_FILTER_GAUSS, 32, 10);
+
+
 	//エラーチェック
 	if (back_ground == -1)
 	{

@@ -28,6 +28,9 @@ void TitleScene::Initialize()
 	//効果音
 	sound = LoadSoundMem("Resource/sound/engine.mp3");
 
+	GraphFilter(menu_image, DX_GRAPH_FILTER_HSB, 0, 1, 0, 0);
+	GraphFilter(background_image, DX_GRAPH_FILTER_LEVEL, 30, 210, 120, 0, 255);
+
 	//エラーチェック
 	if (background_image == -1)
 	{
@@ -116,6 +119,10 @@ void TitleScene::Draw() const
 
 	//カーソル画像の描画
 	DrawRotaGraph(90, 220 + menu_cursor * 40, 0.7, DX_PI / 2.0, cursor_image, TRUE);
+
+	//DrawGraph(20, 300, menu_image, TRUE);
+	//DrawRotaGraph(250, 320 + menu_cursor * 40, 0.7, DX_PI / -2.0, cursor_image, TRUE);
+
 
 }
 

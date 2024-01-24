@@ -24,6 +24,10 @@ void ResultScene::Initialize()
 	back_ground = LoadGraph("Resource/images/back.bmp");
 	int result = LoadDivGraph("Resource/images/car.bmp", 3, 3, 1, 63, 120, enemy_image);
 
+
+	//GraphFilter(back_ground, DX_GRAPH_FILTER_GAUSS, 32, 1000);
+
+
 	//エラーチェック
 	if (back_ground == -1)
 	{
@@ -60,18 +64,19 @@ eSceneType ResultScene::Update()
 //描画処理
 void ResultScene::Draw() const
 {
-	
-	GraphFilter(back_ground, DX_GRAPH_FILTER_GAUSS, 16, 1400);
+	GraphFilter(back_ground, DX_GRAPH_FILTER_GAUSS, 32, 300);
 
 	//背景画像を描画
 	DrawGraph(0, 0, back_ground, TRUE);
-
+	
 
 	//スコア等表示領域
 	DrawBox(150, 150, 490, 330, GetColor(0, 0, 0), TRUE);
 	DrawBox(150, 150, 490, 330, GetColor(255, 255, 255), FALSE);
 
 	DrawBox(500, 0, 640, 480, GetColor(0, 0, 250), TRUE);
+
+	
 
 	SetFontSize(30);
 	ChangeFont("ＭＳ 明朝");
@@ -92,12 +97,14 @@ void ResultScene::Draw() const
 			//enemy_count[i], (i + 1), (i + 1), enemy_count[i]);
 	}
 
-	DrawString(180, 290, "スコア", GetColor(255, 255, 255));
+	DrawString(200, 290, "スコア", GetColor(255, 255, 255));
 	DrawFormatString(260, 290, 0xFFFFFF, "            =%6d", score);
 
 	SetFontSize(15);
-	DrawString(340, 310, "'A'タイトルへ戻る", GetColor(255, 100, 100));
-	DrawString(152, 310, "'B'ランキングに登録", GetColor(0, 255, 0));
+	//DrawString(340, 310, "'A'タイトルへ戻る", GetColor(255, 100, 100));
+	DrawString(170, 310, "-- Bボタンでランキングに登録する --", GetColor(0, 255, 0));
+
+	DrawString(150, 450, "---- Aボタンを押してタイトルへ戻る ----", 0xffffff, 0);
 
 
 }

@@ -261,7 +261,6 @@ void Player::Movement()
 	{
 		move += Vector2D(-3.0f, 0.0f);
 		angle = -DX_PI_F / 18;
-
 	}
 	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_RIGHT))
 	{
@@ -276,31 +275,32 @@ void Player::Movement()
 	{
 		move += Vector2D(0.0f, 3.0f);
 	}
-
 	//スティック移動処理
 	if (InputControl::GetLeft_Stick_X)
 	{
 		move += Vector2D(stick2[0], 0.0f);
 
-		if (stick2[0] >= 0.2f)
+		if (stick2[0] >= 0.1f)
 		{
 			angle = DX_PI_F / 25;
 		}
-		else if (stick2[0] <= -0.2f)
+		else if (stick2[0] <= -0.1f)
 		{
 			angle = -DX_PI_F / 25;
 		}
+		
 		else if (stick2[0] == 0.0f)
 		{
 			angle = -DX_PI_F / 25;
 		}
 	}
-
 	if (InputControl::GetLeft_Stick_Y)
 	{
 		move -= Vector2D(0.0f, stick2[1]);
 	}
 	
+		location += move;
+
 	if (CheckHitKey(KEY_INPUT_LEFT))
 	{
 		move += Vector2D(-3.5f, 0.0f);
@@ -330,9 +330,7 @@ void Player::Movement()
 		move += Vector2D(3.5f, 0.0f);
 		angle = DX_PI_F / 18;
 	}
-	
 
-	location += move;
 
 	//画面外に行かないように制限する
 	if ((location.x < box_size.x) || (location.x >= 640.0f - 170.0f) ||

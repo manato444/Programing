@@ -23,6 +23,9 @@ public:
 	//終了処理
 	void Finalize();
 
+	//リセット処理
+	void Reset();
+
 public:
 
 	//ランキングデータの設定

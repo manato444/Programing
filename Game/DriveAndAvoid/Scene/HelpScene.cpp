@@ -16,6 +16,9 @@ void HelpScene::Initialize()
 	//画像の読み込み
 	background_image = LoadGraph("Resource/images/Title.bmp");
 
+	GraphFilter(background_image, DX_GRAPH_FILTER_LEVEL, 30, 210, 120, 0, 255);
+
+
 	//エラーチェック
 	if (background_image == -1)
 	{
@@ -38,6 +41,8 @@ eSceneType HelpScene::Update()
 //描画処理
 void HelpScene::Draw() const
 {
+
+
 	//背景画像の描画
 	DrawGraph(0, 0, background_image, FALSE);
 

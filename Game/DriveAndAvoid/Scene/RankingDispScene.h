@@ -8,6 +8,7 @@ class RankingDispScene : public SceneBase
 
 private:
 
+
 private:
 
 	//”wŒi‰æ‘œ
