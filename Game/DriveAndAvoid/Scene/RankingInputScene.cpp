@@ -160,6 +160,10 @@ bool RankingInputScene::InputName()
 		{
 			cursor_x++;
 		}
+		else if(cursor_x == 1)
+		{
+			cursor_x = 0;
+		}
 		else
 		{
 			cursor_x = 0;
@@ -215,9 +219,10 @@ bool RankingInputScene::InputName()
 				return true;
 
 			}
-			if(cursor_x == 1)
+			else 
 			{
-				name[name_num--] = '\0';
+				name_num--;
+				name[name_num] = '\0';
 			}
 		}
 

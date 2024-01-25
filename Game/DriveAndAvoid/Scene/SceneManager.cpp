@@ -7,6 +7,7 @@
 #include"HelpScene.h"
 #include"RankingDispScene.h"
 #include"RankingInputScene.h"
+#include"../Utility/Fps.h"
 
 /********************************
 * FPSの表示（ネットのコード）
@@ -104,8 +105,9 @@ void SceneManager::Update()
 	//メインループ
 	while (ProcessMessage() != -1)
 	{
-		/*************************
-		*FPSの表示（ネットのコード）
+		
+		/************************
+		*FPSの表示
 		fps.Update();	//更新
 		fps.Draw();		//描画
 		ScreenFlip();
