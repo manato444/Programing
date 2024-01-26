@@ -32,9 +32,11 @@ void Player::Initialize()
 	fuel_max = fuel;
 
 	//‰æ‘œ‚Ì“Ç‚İ‚İ
-	image = LoadGraph("Resource/images/car1pol.bmp");
+	//image = LoadGraph("Resource/images/car1pol.bmp");
 	//image = LoadGraph("Resource/images/gentuki.bmp");
-	//image = LoadGraph("Resource/images/car1.bmp");
+	image = LoadGraph("Resource/images/Player.bmp");
+	//image = LoadGraph("Resource/images/car3.bmp");
+
 
 	//Œø‰Ê‰¹
 	sound_c = LoadSoundMem("Resource/sound/carcrash.mp3");
@@ -124,6 +126,8 @@ void Player::Update()
 //•`‰æˆ—
 void Player::Draw()
 {
+	
+
 	//ƒvƒŒƒCƒ„[‰æ‘œ‚Ì•`‰æ
 	DrawRotaGraphF(location.x, location.y, 1.0, angle, image, TRUE);
 

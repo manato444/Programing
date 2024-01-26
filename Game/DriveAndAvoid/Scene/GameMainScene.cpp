@@ -33,9 +33,12 @@ void GameMainScene::Initialize()
 	ReadHighScore();
 
 	//‰æ‘œ‚Ì“Ç‚İ‚İ
-	back_ground = LoadGraph("Resource/images/back.bmp");
+	//back_ground = LoadGraph("Resource/images/back.bmp");
+	back_ground = LoadGraph("Resource/images/space.bmp");
+
 	barrier_image = LoadGraph("Resource/images/barrier.png");
 	int result = LoadDivGraph("Resource/images/car.bmp", 3, 3, 1, 63, 120, enemy_image); 
+
 	item_image = LoadGraph("Resource/images/gasoline.bmp");
 	//item_image = LoadGraph("Resource/images/supana.bmp");
 
