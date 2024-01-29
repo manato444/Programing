@@ -1,8 +1,8 @@
 #pragma once
 
 #include"../Utility/Vector2D.h"
-//#include"../Utility/InputControl.h"
 #include"Barrier.h"
+
 
 class Player
 {
@@ -23,8 +23,10 @@ private:
 
 	int sound_c;	//クラッシュ効果音
 	int sound_f;	//燃料回復効果音
+	int sound_b;	//バリア効果音
 
 	int crash;
+;
 
 public:
 
@@ -47,6 +49,7 @@ public:
 
 	void CarCrash();	//クラッシュ
 	void FuelUp();		//燃料回復
+	void BarrierSound();
 
 	float SetFuel();	//なんだっけ
 

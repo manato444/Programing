@@ -5,10 +5,12 @@
 float Player::stick2[2] = {};
 
 
-Player::Player() : is_active(false), image(NULL), location(0.0f), box_size(0.0f), angle(0.0f),
+Player::Player() : is_active(false), image(NULL), location(0.0f), box_size(0.0f), angle(0.0f),crash(),fuel_max(),sound_c(),sound_f(),
 				                                  speed(0.0f), hp(0.0f), fuel(0.0f), barrier_count(0),
 barrier(nullptr)
 {
+
+
 }
 
 Player::~Player()
@@ -18,29 +20,33 @@ Player::~Player()
 //初期化処理
 void Player::Initialize()
 {
-
 	is_active = true;
-	//location = Vector2D(320.0f, 380.0f);
+
 	location = Vector2D(250.0f, 380.0f);
 	box_size = Vector2D(26.0f, 54.0f);
+
 	angle = 0.0f;
-	speed = 24.5f;
-	hp = 1000;
-	fuel = 85000;
+	speed = 24.5f;			//スピード
+
+	hp = 1000;				//体力
+	fuel = 85000;			//燃料
 	//fuel_max = 85000;
-	barrier_count = 4;
+
+	barrier_count = 4;		//バリアの枚数
 	fuel_max = fuel;
 
 	//画像の読み込み
-	//image = LoadGraph("Resource/images/car1pol.bmp");
+	image = LoadGraph("Resource/images/car1pol.bmp");
 	//image = LoadGraph("Resource/images/gentuki.bmp");
-	image = LoadGraph("Resource/images/Player.bmp");
+	//image = LoadGraph("Resource/images/Player.bmp");
 	//image = LoadGraph("Resource/images/car3.bmp");
-
 
 	//効果音
 	sound_c = LoadSoundMem("Resource/sound/carcrash.mp3");
 	sound_f = LoadSoundMem("Resource/sound/Fuelup.mp3");
+	sound_b = LoadSoundMem("Resource/sound/Barrier.mp3");
+
+	ChangeVolumeSoundMem(255 * 70 / 100, sound_b);
 
 
 	//エラーチェック
@@ -54,7 +60,7 @@ void Player::Initialize()
 //更新処理
 void Player::Update()
 {
-	
+
 	//操作不可状態であれば、自身を回転させる
 	if (!is_active)
 	{
@@ -65,7 +71,7 @@ void Player::Update()
 		if (angle >= DX_PI_F * 4.0f)
 		{
 			is_active = true;
-				GraphFilter(image, DX_GRAPH_FILTER_INVERT);
+				//GraphFilter(image, DX_GRAPH_FILTER_INVERT);
 			
 		}
 		return;
@@ -90,16 +96,20 @@ void Player::Update()
 		is_active = false;
 	}
 
+
 	//バリア処理(Bボタン)
 	if (InputControl::GetButtonDown(XINPUT_BUTTON_B) && barrier_count > 0)
 	{
+		BarrierSound();
+
 		if (barrier == nullptr)
 		{
 			barrier_count--;
 			barrier = new Barrier;
 		}
 	}
-	/*
+
+	//バリア処理（スペースキー）
 	if (CheckHitKey(KEY_INPUT_SPACE) && barrier_count > 0)
 	{
 		if (barrier == nullptr)
@@ -108,12 +118,12 @@ void Player::Update()
 			barrier = new Barrier;
 		}
 	}
-	*/
 
 
 	//バリアが生成されたら、更新を行う
 	if (barrier != nullptr)
 	{
+
 		//バリア時間が経過したか？していたら、削除する
 		if (barrier->IsFinished(this->speed))
 		{
@@ -121,13 +131,12 @@ void Player::Update()
 			barrier = nullptr;
 		}
 	}
+
 }
 
 //描画処理
 void Player::Draw()
 {
-	
-
 	//プレイヤー画像の描画
 	DrawRotaGraphF(location.x, location.y, 1.0, angle, image, TRUE);
 
@@ -136,6 +145,7 @@ void Player::Draw()
 	{
 		barrier->Draw(this->location);
 	}
+
 }
 
 //終了時処理
@@ -175,7 +185,7 @@ void Player::CarCrash()
 	if (!is_active)
 	{
 		PlaySoundMem(sound_c, TRUE);
-		GraphFilter(image, DX_GRAPH_FILTER_INVERT);
+		//GraphFilter(image, DX_GRAPH_FILTER_INVERT);
 		
 	}
 }
@@ -186,7 +196,13 @@ void Player::FuelUp()
 	PlaySoundMem(sound_f, TRUE);
 }
 
-//なんだっけ
+//バリア効果音
+void Player::BarrierSound()
+{
+	PlaySoundMem(sound_b, TRUE);
+}
+
+//燃料の最大値
 float Player::SetFuel()
 {
 	return this->fuel_max;
@@ -197,6 +213,7 @@ Vector2D Player::GetLocation() const
 {
 	return this->location;
 }
+
 
 //当たり判定の大きさ取得処理
 Vector2D Player::GetBoxSize() const
@@ -302,9 +319,8 @@ void Player::Movement()
 	{
 		move -= Vector2D(0.0f, stick2[1]);
 	}
-	
-		location += move;
 
+	//キー操作
 	if (CheckHitKey(KEY_INPUT_LEFT))
 	{
 		move += Vector2D(-3.5f, 0.0f);
@@ -335,6 +351,7 @@ void Player::Movement()
 		angle = DX_PI_F / 18;
 	}
 
+	location += move;
 
 	//画面外に行かないように制限する
 	if ((location.x < box_size.x) || (location.x >= 640.0f - 170.0f) ||

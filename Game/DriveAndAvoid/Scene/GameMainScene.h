@@ -5,6 +5,7 @@
 #include"../Object/Enemy.h"
 #include"../Object/Item.h"
 
+
 class GameMainScene : public SceneBase
 {
 private:
@@ -20,6 +21,8 @@ private:
 
 	Item* item;		//アイテム
 	int item_image;	//アイテム画像
+
+
 
 	//int item_count[1];	//アイテム追加したら多分使う
 
@@ -41,8 +44,6 @@ private:
 
 	//ハイスコア読み込み処理
 	void ReadHighScore();
-
-	void GameCount();	//なんでつくった
 
 	//当たり判定
 	bool IsHitCheck(Player* p, Enemy* e);

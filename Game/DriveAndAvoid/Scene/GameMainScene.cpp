@@ -14,8 +14,6 @@ GameMainScene::GameMainScene() : high_score(0), back_ground(NULL), barrier_image
 	{
 		enemy_image[i] = NULL;
 		enemy_count[i] = NULL;
-
-		
 		//item_count[i] = NULL;
 	}
 }
@@ -25,7 +23,6 @@ GameMainScene::~GameMainScene()
 }
 
 
-
 //初期化処理
 void GameMainScene::Initialize()
 {
@@ -33,20 +30,15 @@ void GameMainScene::Initialize()
 	ReadHighScore();
 
 	//画像の読み込み
-	//back_ground = LoadGraph("Resource/images/back.bmp");
-	back_ground = LoadGraph("Resource/images/space.bmp");
+	back_ground = LoadGraph("Resource/images/back.bmp");
+	//back_ground = LoadGraph("Resource/images/space.bmp");
 
 	barrier_image = LoadGraph("Resource/images/barrier.png");
 	int result = LoadDivGraph("Resource/images/car.bmp", 3, 3, 1, 63, 120, enemy_image); 
-
 	item_image = LoadGraph("Resource/images/gasoline.bmp");
-	//item_image = LoadGraph("Resource/images/supana.bmp");
-
-
-	//item_image = LoadGraph("Resource/images/supana.bmp"); //コピペ用
 	
 	//↓飾り
-	//image = LoadGraph("Resource/images/supana.bmp");
+	image = LoadGraph("Resource/images/supana.bmp");
 
 	//BGM(気分で変える)
 	//sound = LoadSoundMem("Resource/sound/BreakItDown.mp3");
@@ -56,6 +48,7 @@ void GameMainScene::Initialize()
 	//ボリューム（BGM）
 	ChangeVolumeSoundMem(255 * 70 / 100, sound);
 
+	//背景（地面）のフィルター
 	GraphFilter(back_ground, DX_GRAPH_FILTER_LEVEL, 35, 210, 120, 0, 255);
 	GraphFilter(back_ground, DX_GRAPH_FILTER_GAUSS, 32, 10);
 
@@ -81,7 +74,6 @@ void GameMainScene::Initialize()
 	//オブジェクトの生成
 	player = new Player;
 	enemy = new Enemy* [10];
-
 	item = new Item(item_image);
 
 	//オブジェクトの初期化
@@ -149,7 +141,6 @@ eSceneType GameMainScene::Update()
 			//画面外に行ったら、削除
 			if (item->GetLocation().y >= 640.0f)
 			{
-				//item_count[item->GetType()]++;	//アイテム追加するとき多分使う
 				item->Finalize();
 				delete item;
 				item = nullptr;
@@ -176,9 +167,6 @@ eSceneType GameMainScene::Update()
 		}
 	}
 	
-
-
-
 	//敵の更新と当たり判定チェック
 	for (int i = 0; i < 10; i++)
 	{

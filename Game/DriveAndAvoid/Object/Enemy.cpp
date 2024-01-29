@@ -34,6 +34,11 @@ void Enemy::Update(float speed)
 	location += Vector2D(0.0f, this->speed + speed - 27);
 }
 
+void Enemy::Movement()
+{
+
+}
+
 void Enemy::Draw() const
 {
 	//“G‰æ‘œ‚Ì•`‰æ

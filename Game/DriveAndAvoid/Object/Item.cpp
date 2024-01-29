@@ -16,10 +16,8 @@ Item::~Item()
 void Item::Initialize()
 {
 
-		image[0] = LoadGraph("Resource/images/gasoline.bmp", image[0]);
+	image[0] = LoadGraph("Resource/images/gasoline.bmp", image[0]);
 	
-
-
 	//出現させるX座標パターンを取得
 	float random_x = (float)(GetRand(4) * 105 + 40);
 
