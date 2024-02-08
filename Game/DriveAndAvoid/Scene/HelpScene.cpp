@@ -24,6 +24,7 @@ void HelpScene::Initialize()
 	{
 		throw("Resource/images/Title.bmp‚ª‚ ‚è‚Ü‚¹‚ñ");
 	}
+
 }
 
 

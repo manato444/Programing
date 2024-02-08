@@ -5,7 +5,8 @@
 float Player::stick2[2] = {};
 
 
-Player::Player() : is_active(false), image(NULL), location(0.0f), box_size(0.0f), angle(0.0f),crash(),fuel_max(),sound_c(),sound_f(),
+Player::Player() : is_active(false), image(NULL), location(0.0f), box_size(0.0f), angle(0.0f),crash(),
+												  fuel_max(),sound_c(),sound_f(),sound_b(),
 				                                  speed(0.0f), hp(0.0f), fuel(0.0f), barrier_count(0),
 barrier(nullptr)
 {
@@ -20,6 +21,7 @@ Player::~Player()
 //初期化処理
 void Player::Initialize()
 {
+
 	is_active = true;
 
 	location = Vector2D(250.0f, 380.0f);
@@ -54,6 +56,7 @@ void Player::Initialize()
 	{
 		throw("Resource/images/car1pol.bmpがありません\n");
 	}
+
 }
 
 
@@ -64,7 +67,6 @@ void Player::Update()
 	//操作不可状態であれば、自身を回転させる
 	if (!is_active)
 	{
-		
 		angle += DX_PI_F / 10.0f;
 		speed = 8.0f;
 
@@ -137,6 +139,7 @@ void Player::Update()
 //描画処理
 void Player::Draw()
 {
+
 	//プレイヤー画像の描画
 	DrawRotaGraphF(location.x, location.y, 1.0, angle, image, TRUE);
 
@@ -261,7 +264,7 @@ float Player::SetLeft_Stick_X()
 	return stick2[0];
 }
 
-//右スティックの値をセット
+//左スティックの値をセット
 float Player::SetLeft_Stick_Y()
 {
 	stick2[1] = InputControl::GetLeft_Stick_Y();
@@ -323,31 +326,31 @@ void Player::Movement()
 	//キー操作
 	if (CheckHitKey(KEY_INPUT_LEFT))
 	{
-		move += Vector2D(-3.5f, 0.0f);
+		move += Vector2D(-3.0f, 0.0f);
 		angle = -DX_PI_F / 18;
 	}
 	if (CheckHitKey(KEY_INPUT_RIGHT))
 	{
-		move += Vector2D(3.5f, 0.0f);
+		move += Vector2D(3.0f, 0.0f);
 		angle = DX_PI_F / 18;
 	}
 	if (CheckHitKey(KEY_INPUT_UP))
 	{
-		move += Vector2D(0.0f, -3.5f);
+		move += Vector2D(0.0f, -3.0f);
 	}
 	if (CheckHitKey(KEY_INPUT_DOWN))
 	{
-		move += Vector2D(0.0f, 3.5f);
+		move += Vector2D(0.0f, 3.0f);
 	}
 
 	if (CheckHitKey(KEY_INPUT_A))
 	{
-		move += Vector2D(-3.5f, 0.0f);
+		move += Vector2D(-3.0f, 0.0f);
 		angle = -DX_PI_F / 18;
 	}
 	if (CheckHitKey(KEY_INPUT_D))
 	{
-		move += Vector2D(3.5f, 0.0f);
+		move += Vector2D(3.0f, 0.0f);
 		angle = DX_PI_F / 18;
 	}
 
@@ -383,12 +386,13 @@ void Player::Acceleration()
 	}
 	else
 	{
-		/*(離すとゆっくり減速)
+		/*/(離すとゆっくり減速)
 		for (int i = 0; i < speed - 4; i++)
 		{
 			speed -= 0.001f;
 		}
 		*/
+		
 	}
 	//左トリガーで減速
 	if (InputControl::GetLeftTrigger() && speed > 1.0f)

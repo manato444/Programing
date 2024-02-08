@@ -123,7 +123,7 @@ void TitleScene::Draw() const
 	//DrawGraph(20, 300, menu_image, TRUE);
 	//DrawRotaGraph(250, 320 + menu_cursor * 40, 0.7, DX_PI / -2.0, cursor_image, TRUE);
 
-
+	//DrawString(8, 460, "B:Œˆ’è", 0xffffff, 0);
 }
 
 //I—¹ˆ—

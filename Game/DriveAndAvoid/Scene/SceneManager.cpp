@@ -24,6 +24,9 @@ void SceneManager::Initialize()
 	//ウィンドウのタイトルを設定
 	SetMainWindowText("Drive&Avoid　ドライブ＆アボイド");
 
+	//ウィンドウサイズを手動で変更できる
+	SetWindowSizeChangeEnableFlag(TRUE, TRUE);
+
 	//ウィンドウモードで起動
 	if (ChangeWindowMode(TRUE) != DX_CHANGESCREEN_OK)
 	{

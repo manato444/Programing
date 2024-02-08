@@ -28,11 +28,12 @@ void InputControl::Update()
 	trigger[0] = (float)input_state.LeftTrigger / (float)UCHAR_MAX;
 	trigger[1] = (float)input_state.RightTrigger / (float)UCHAR_MAX;
 
-	stick1[0] = input_state.ThumbLX / (float)SHRT_MAX * 3.8f;
-	stick1[1] = input_state.ThumbLY / (float)SHRT_MAX * 3.8f;
+	stick1[0] = input_state.ThumbLX / (float)SHRT_MAX * 3.5f;
+	stick1[1] = input_state.ThumbLY / (float)SHRT_MAX * 3.5f;
 
 
-	/*
+
+	/*****************************************************************
 	//左スティックの入力値の更新（-1.0f～1.0fに範囲を制限する）
 	if (input_state.ThumbLX > 0.0f)
 	{
@@ -68,7 +69,7 @@ void InputControl::Update()
 	{
 		stick[1].y = -((float)input_state.ThumbRY / (float)SHRT_MIN);
 	}
-	*/
+	******************************************************************/
 }
 
 //ボタン取得：押している間
